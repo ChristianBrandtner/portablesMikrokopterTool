@@ -1,0 +1,18 @@
+//############################################################################
+//# HISTORY  setup.c
+//#
+//# 17.11.2015 Cebra
+//# - chg: Setup_Wi232: Änderungen der Wi232 Parameter wurden nicht ins Wi232 geschrieben
+
+//############################################################################
+//# HISTORY  Wi232.c
+//#
+//# 17.11.2015 Cebra
+//# - chg: Funktion Wi232_Initalize um Rückgabewert erweitert, wird im Setup benötigt
+//#
+
+//############################################################################
+//# HISTORY  messages.c
+//#
+//# 17.11.2015 Cebra
+//# - add: neuer Text STR_NOCHANGE

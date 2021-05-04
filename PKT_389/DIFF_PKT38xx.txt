@@ -1,0 +1,31 @@
+//############################################################################
+//# HISTORY  mkparameters_messages.h
+//#
+//# 18.01.2016 Cebra
+//# - add: Texte für neue Parameter in FC 2.13a inkl. der ID's
+//#        const char param_CamCtrlModeChannel_de
+//#        const char param_CamCtrlZoomChannel_de
+
+//############################################################################
+//# HISTORY  mkparameters.c
+//#
+//# 18.01.2016 Cebra
+//# - add: Erweiterung CamCtrlModeChannel; (FC2.13a)
+//#                    CamCtrlZoomChannel; (FC2.13a)
+//#                    MainMenü um Menüpunkt ID_MENU_CAMCTRL erweitert
+
+//############################################################################
+//# HISTORY  paramset.c
+//#
+//# 18.01.2016 Cebra
+//# - add: unsigned char CamCtrlModeChannel; (FC2.13a)
+//#        unsigned char CamCtrlZoomChannel; (FC2.13a)
+//# - add: paramset_107 (FC2.13a)
+
+//############################################################################
+//# HISTORY  paramset.h
+//#
+//# 18.01.2016 Cebra (PKT385a)
+//# - add: #define param_CamCtrlModeChannel (FC2.13a)
+//#        #define param_CamCtrlZoomChannel (FC2.13a)
+
