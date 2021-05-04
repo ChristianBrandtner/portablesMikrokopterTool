@@ -1,0 +1,653 @@
+/*  common.css of MoinMoin theme "sinorca4moin" by David Linke.
+    $Id: common.css 118 2006-10-12 10:39:30Z linke $
+*/
+@import url(MoinAttentionBoxes/MoinAttentionBoxes.css);
+
+html {
+	
+	color: black;
+	font-family: Tahoma, "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 0.8em;
+/*	line-height: 1.25em;*/
+	margin: 0;
+	padding: 0;
+}
+
+/* Headings */
+
+
+h1, h2, h3, h4, h5 {
+	margin: 1em 0 0.5em 0;
+	padding: 5px 0px 2px;
+    font-weight: normal;
+	color: rgb(75, 75, 75);
+	line-height: 1.2em;
+    width: 99%;
+	
+	/*border-bottom: 3px solid rgb(100,135,220);
+	border-left: 10px solid rgb(100,135,220);*/
+	
+}	
+ 
+h1 {font-size: 170%; padding-top: 5px; margin-top: 50px;  border-bottom: 1px solid #aaa; }
+h2 {font-size: 125%; border-left: none; border-bottom: 0px solid rgb(100,135,220); font-weight: bold;}
+h3 {font-size: 110%;  border:none; font-weight: bold; font-style: italic; }
+h4 {font-size: 105%; border:none; border-left: none; border-bottom: 0px solid rgb(100,135,220); font-style: italic; }
+h5 {font-size: 1em; font-weight:normal; border:none; font-style: italic;}
+
+/* title of the current wiki-page should not be displayed as list */
+#pagelocation {
+    margin: 0;
+    font-size: 0.75em;
+    line-height: 1.0em;
+}
+#pagelocation li {
+    display: inline;
+    list-style: none;
+}
+
+/* Links */
+
+a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+/*a.http:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.https:before {content: url(../img/moin-www.png); margin: 0 0.2em;}*/
+a.file:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.ftp:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.nntp:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.news:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.telnet:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.irc:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
+a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
+a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+
+/* IE sucks */
+* html a.www { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+* html a.http { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+* html a.https { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+* html a.file { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
+* html a.ftp { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
+* html a.nntp { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
+* html a.news { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
+* html a.telnet { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
+* html a.irc { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
+* html a.mailto { padding-left: 14px; background: url(../img/moin-email.png) left center no-repeat; }
+* html a.attachment { padding-left: 14px; background: url(../img/moin-attach.png) left center no-repeat; }
+* html a.badinterwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
+* html a.interwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
+
+
+li p {
+	margin: .25em 0;
+}
+
+li.gap {
+	margin-top: 0.5em;
+}
+
+
+a, img, img.drawing {
+	border: 0;
+    max-width: 180px;
+
+   } 
+
+    
+dt {
+	font-weight: bold;
+}
+
+/* fix problem with small font for inline code */
+tt {
+	font-size: 1.25em;
+}
+
+pre {
+	padding: 5px;
+	border: 1px solid #c0c0c0;
+	font-family: courier, monospace;
+	white-space: pre;
+	/* begin css 3 or browser specific rules - do not remove!
+	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+    	white-space: pre-wrap;
+	word-wrap: break-word;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	/* end css 3 or browser specific rules */
+}
+
+table {
+	margin: 0.5em 0;
+	font-size: 1em; /* Required to get correct size with GUI editor */
+	border-collapse: collapse;
+}
+
+td
+{
+	padding: 0.25em;
+	border: 1px solid #c0c0c0;
+}
+
+td p {
+	margin: 0;
+	padding: 0;
+}
+
+/* standard rule ---- */
+hr {
+	height: 1px;
+	background-color: #d0d0d0;
+	border: none;
+}
+
+/* custom rules ----- to ---------- */
+.hr1 {height: 3px;}
+.hr2 {height: 4px;}
+.hr3 {height: 5px;}
+.hr4 {height: 6px;}
+.hr5 {height: 7px;}
+.hr6 {height: 8px;}
+
+/* Replacement for deprecated html 3 <u> element and html 4 <strike> */
+.u {text-decoration: underline;}
+.strike {text-decoration: line-through;}
+
+.footnotes ul {
+	padding: 0 2em;
+	margin: 0 0 1em;
+	list-style: none;
+}
+
+.footnotes li {
+}
+
+
+/* eye catchers */
+.warning 
+{
+	color: red;
+}
+
+.error 
+{
+	color: red;
+}
+
+strong.highlight 
+{
+	background-color: #ffcc99;
+	padding: 1pt;
+}
+
+
+/* Recent changes */
+
+div.recentchanges table {
+	border: 1px solid #e5e5e5; 
+}
+
+.recentchanges p {
+	margin: 0.25em;
+}
+
+.recentchanges td {
+	border: none;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	vertical-align: top;
+}
+
+.rcdaybreak {
+	background-color: #E5E5E5;
+}
+
+.rcdaybreak td a {
+	font-size: 0.88em;
+}
+
+.rcicon1, .rcicon2 {
+	text-align: center;
+}
+
+.rcpagelink {
+	width: 33%;
+}
+
+.rctime {
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+
+.rceditor {
+	white-space: nowrap;
+	font-size: 0.88em;
+}
+
+.rccomment {
+	width: 66%;
+	color: gray;
+	font-size: 0.88em;
+}
+
+.rcrss {
+	float: right;
+}
+
+.recentchanges[dir="rtl"] .rcrss {
+	float: left;
+}
+
+/* User Preferences */
+
+.userpref table, .userpref td {
+	border: none;
+}
+
+/* CSS for new code_area markup used by Colorizer and ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 0.5em 0;
+	padding: 0;
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	color: black;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 10pt;
+	border: none;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0 10pt;
+	font-size: 0.85em;
+	color: gray;
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: gray;}
+div.codearea pre span.ID         {color: #000000;}
+div.codearea pre span.Operator   {color: #0000C0;}
+div.codearea pre span.Char       {color: #004080;}
+div.codearea pre span.Comment    {color: #008000;}
+div.codearea pre span.Number     {color: #0080C0;}
+div.codearea pre span.String     {color: #004080;}
+div.codearea pre span.SPChar     {color: #0000C0;}
+div.codearea pre span.ResWord    {color: #A00000;}
+div.codearea pre span.ConsWord   {color: #008080; font-weight: bold;}
+div.codearea pre span.Error      {color: #FF8080; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
+div.codearea pre span.Special    {color: #0000ff;}
+div.codearea pre span.Preprc     {color: #803999;}
+
+/* pageinfo */
+.info {
+    float: right;
+    font-size: 0.8em;
+    font-style:italic;
+    color: gray;
+}
+
+#pageinfo {
+  
+}
+
+/* AttachFile Table */
+.attachmentTable {
+
+}
+
+.attachmentTable table {
+    border: 2px solid rgb(100,135,220);  /* Light blue */
+     border-collapse: collapse;
+      width: 80%;
+       margin-left: 20px;
+}
+
+.attachmentTable td {
+    border: 1px solid lightblue;
+     padding: 6px
+}
+
+.attachmentTable th {
+    border: 1px solid lightblue;
+     background-color: rgb(100,135,220); /* rgb(100,135,220) */
+      font-weight: bold;
+       padding: 6px
+}
+
+.attachmentTable tr {
+    background-color: rgb(240,240,240)
+}
+
+.attachmentTable tr.altrow {
+    background-color: rgb(127,127,255);
+}
+
+.attachmentTable tr:hover {
+ /*   background-color: rgb(140,170,230);
+     color: white*/
+}
+
+/* DL-Page */
+.newitem {
+        color:red;
+		font-size: 9px;
+		font-weight: bold;
+}
+
+TD.download_header
+{
+/*        background-image: url(../images/kopter/tile_back.gif);*/
+		
+  color: rgb(39,78,144);
+  background-color: rgb(140,170,230);
+		font-size: 15px;
+		letter-spacing: 5px;
+		text-align: left;
+		padding-left:10px;
+		font-weight: bold;
+		
+ }
+
+.VideoDatum, .VideoLaenge { color:#666666; font-size:9px; }
+.VideoBeschreibung { padding-top: 5px; font-size:10px; }
+.VideoSpalte { padding: 10px 10px 10px 10px; }
+
+/* admonition start */
+#content div.caution,
+#content div.important,
+#content div.note,
+#content div.tip,
+#content div.warning {
+    border: 1px solid #aaa;
+    background-color: #F9F9DF;
+    color: black;
+
+    margin: 10pt 30pt 15pt 30pt;
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
+    padding-left: 64px;
+	padding-bottom: 9px;
+    box-shadow: 2px 2px 10px #aaa;
+}
+
+
+#content div.tip2
+{
+    border: 1px solid #aaa;
+    background-color: #F9F9DF;
+    color: black;
+
+    margin: 10pt 30pt 15pt 30pt;
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
+    padding-left: 15px;
+    padding-right: 15px;
+	padding-bottom: 9px;
+    box-shadow: 2px 2px 10px #aaa;
+}
+
+
+#content div.caution p,
+#content div.important p,
+#content div.note p,
+#content div.tip p,
+#content div.warning p {
+    margin-top: 8px; /*to align text with bg graphic*/
+}
+
+#content div.tip { background-image: url("../img/admon-tip.png"); }
+#content div.note { background-image: url("../img/admon-note.png"); }
+#content div.important { background-image: url("../img/admon-important.png"); }
+#content div.caution { background-image: url("../img/admon-caution.png"); }
+#content div.warning { background-image: url("../img/admon-warning.png"); }
+
+/* admonition end */
+
+#content div.test1 { background: #FF0000; }
+
+#content div.MK_select {
+background-color:#9FC6E7;
+width:240px;
+height:60px;
+float:right;
+line-height: 15px;
+}
+
+#content div.MK_select li{
+    list-style:none;
+}
+
+#content div.MK_header{
+/*background-color:#9FC6E7;*/
+/*background-color: #F9F9DF;*/
+font-weight:bold;
+/*width:100%;*/
+font-size: 2em;
+line-height: 1.2em;
+border-bottom: 5px solid rgb(100,135,220);
+border-left: 10px solid rgb(100,135,220);
+padding: 5px 5px 2px;
+margin: 0.1em 0 0.5em 0;
+
+}
+
+#content div.MK_select2 {
+ width: 300px;
+
+}
+
+#content div.MK_select2 ul {
+    width: 16em;
+    margin: 0; padding: 0.2em;
+    border: 1px solid black;
+    background-color: rgb(100,135,220);
+	
+	
+}
+#content div.MK_select2 li {
+    list-style: none;
+    margin: 0.25em; padding: 0.2em;
+    border: 1px solid gray;
+    background-color: #F9F9DF;
+}
+
+#content div.MK_select1 {
+    /*width: 16em;*/
+    margin: 0; padding: 0;
+	text-align: left;
+    clear: right;
+}
+
+#content div.MK_select1 p{
+ display: inline;
+ margin: 0.25em; padding: 0.5em;
+ background-color: #F9F9DF;
+ border: 1px solid black;
+ }
+
+#content div.MK_select1 li {
+    display: inline;
+	list-style: none;
+}
+
+#content div.MK_select3 {
+    /*width: 16em;*/
+    margin: 0; padding: 0;
+	text-align: left;
+}
+
+#content div.MK_select3 p{
+ display: inline;
+ margin: 0.25em; padding: 0.5em;
+ background-color: #F9F9DF;
+ border: 2px solid rgb(100,135,220);
+ }
+
+#content div.MK_select3 li {
+    display: inline;
+	list-style: none;
+}
+
+#content div.MK_select4 {
+    /*width: 16em;*/
+    position:absolute;
+	top: 95px;
+	right: 10px;
+	margin: 0; padding: 0;
+	text-align: left;
+}
+
+
+#content div.MK_select4 p{
+ display: inline;
+ margin: 0.25em; padding: 0.5em;
+ 
+ }
+
+#content div.MK_select4 li {
+    display: inline;
+	list-style: none;
+	
+    
+}
+
+#content div.MK_select5 {
+    /*width: 16em;*/
+    position:absolute;
+	top: 95px;
+	left: 35%;
+	margin: 0; padding: 0;
+	text-align: left;
+	font-weight: bold;
+}
+
+
+#content div.MK_select5 p{
+ display: inline;
+ margin: 0.25em; padding: 0.5em;
+ 
+ }
+
+#content div.MK_select5 li {
+    display: inline;
+	list-style: none;
+	
+    
+}
+
+#content td.MK_THeader2 {
+	color: rgb(245, 245, 245);
+	font-weight: normal;
+	background-color: #5E6F80;
+	text-align: center;
+	border: 1px solid #5E6F80;	 
+}
+#content td.MK_THeader2 p { 
+	font-size: 1.1em;
+	line-height: 1.3em;
+	text-align:center;
+		margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+}
+
+#content td.MK_THeader {
+	color: rgb(245, 245, 245);
+	font-weight: bold;
+	background-color: #5E6F80;
+	text-align: center;
+	border: 1px solid #5E6F80;	 
+}
+#content td.MK_THeader p { 
+	font-size: 1.1em;
+	line-height: 1.3em;
+	text-align:center;
+		margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+}
+
+#content td.MK_TBody {
+	/* border: 1px solid rgb(186, 215, 247);*/
+}
+#content td.MK_TBody p { 
+}
+
+#content div.MK_center  {
+  margin: 0 auto;
+}
+#content div.MK_Nav table {
+  width : 99%;
+  /*border: 1px solid rgb(186, 215, 247);*/
+  
+}
+
+#content tr.MK_TableNoBorder, td.MK_TableNoBorder  {
+	border: 0;
+}
+
+#content td.MK_TableNoBorder  a:before {
+	content: "";
+}
+/* IE */
+#content td.MK_TableNoBorder  a{
+	background:none;
+}
+
+
+#content td.MK_Nav_Header , #content td.MK_Nav_left, #content td.MK_Nav_middle, #content td.MK_Nav_right {
+	color: rgb(245, 245, 245);
+	font-weight: bold;
+	background-color: #5E6F80;
+	text-align: center;
+	border: 0;
+}
+
+#content td.MK_Nav_Header a ,  #content td.MK_Nav_middle a , #content td.MK_Nav_left a, #content td.MK_Nav_right a 
+{ 
+	color: rgb(245, 245, 245); 
+    text-decoration: underline;    
+}
+
+#content td.MK_Nav_left {
+  text-align: left;
+  width: 30%
+}
+#content td.MK_Nav_left img{
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+#content td.MK_Nav_middle  {
+ text-align: center;
+}
+#content td.MK_Nav_right  {
+ text-align: right;
+width: 30%
+}
+
+#content td.MK_Nav_right  img{
+  vertical-align: middle;
+  padding-left: 5px;
+}
+
+#content td.MK_Nav_Header p {
+	font-size: 1.3em;
+	line-height: 1.3em;
+	margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+
+}
+
+#content td.MK_Nav_left p, #content td.MK_Nav_middle p, #content td.MK_Nav_right p { 
+	font-size: 1.1em;
+	line-height: 1.3em;
+	margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+	
+}

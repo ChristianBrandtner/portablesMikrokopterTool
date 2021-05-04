@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><script type="text/javascript">
+
+		                            var real_socket = window.WebSocket;
+
+	var WebSocket = window.WebSocket = function(uri)
+	{
+		this.websocket = new real_socket(uri);
+		this.websocket.onopen = this.onOpen.bind(this);
+		this.websocket.onmessage = this.onMessage.bind(this);
+		this.listeners = {onmessage: null, onopen: null};
+
+
+
+
+
+
+		if (!window._openWebSockets) window._openWebSockets = [];
+		window._openWebSockets.push(this);
+	};
+
+	WebSocket.prototype.send = function(data) {
+
+
+		// First create the event
+		let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+		                                        {
+			                                        detail:
+				                                        {
+					                                        data: data,
+					                                        obj: this.websocket
+				                                        }
+		                                        }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_to);
+
+		this.websocket.send.apply(this.websocket, arguments);
+	}
+
+	WebSocket.prototype.onOpen = function(e)
+	{
+
+
+		// First create the event
+		let ws_sniff_debug_open = new CustomEvent("ws_sniff_debug_open",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: arguments,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		this.listeners.onopen(e);
+	}
+
+	WebSocket.prototype.onMessage = function(e){
+
+
+
+		// First create the event
+		let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: e.data,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_from);
+
+		this.listeners.onmessage(e);
+	}
+
+	Object.defineProperty(WebSocket.prototype, 'readyState', {
+		get: function() {
+			return this.websocket.readyState;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onopen', {
+		get: function() {
+			return this.listeners.onopen;
+		},
+		set: function(fn) {
+			this.listeners.onopen = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onclose', {
+		get: function() {
+			return this.websocket.onclose;
+		},
+		set: function(fn) {
+			this.websocket.onclose = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onmessage', {
+		get: function() {
+			return this.listeners.onmessage;
+		},
+		set: function(fn) {
+			this.listeners.onmessage = fn;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onerror', {
+		get: function() {
+
+			return this.websocket.onerror;
+		},
+		set: function(fn) {
+
+			this.websocket.onerror = fn;
+		}
+	});
+
+	
+	      setTimeout(function()
+                         {
+
+
+	                         if (typeof(io) == 'function')
+                           {
+          
+
+
+	                           io.Socket.prototype.packet = function (packet) {
+	                       
+	                      
+	                      
+									  // First create the event
+										let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+										                                        {
+											                                        detail:
+												                                        {
+													                                        data: packet.data,
+													                                        obj: io.managers
+												                                        }
+										                                        }
+										);
+								
+										document.body.dispatchEvent(ws_sniff_debug_to);
+		
+		                           packet.nsp = this.nsp;
+		                           this.io.packet(packet);
+	                           };
+
+
+
+	                           var emit = function(event){
+		                           this._callbacks = this._callbacks || {};
+		                           var args = [].slice.call(arguments, 1)
+			                           , callbacks = this._callbacks['$' + event];
+
+		                           if (callbacks) {
+			                           callbacks = callbacks.slice(0);
+			                           for (var i = 0, len = callbacks.length; i < len; ++i) {
+				                           callbacks[i].apply(this, args);
+			                           }
+		                           }
+
+		                           return this;
+	                           };
+
+
+	                           io.Socket.prototype.onevent = function (packet) {
+
+
+		                           // First create the event
+		                           let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                                                   {
+			                                                                   detail:
+				                                                                   {
+					                                                                   data: packet.data,
+					                                                                   obj: io.managers
+				                                                                   }
+		                                                                   }
+		                           );
+
+		                           document.body.dispatchEvent(ws_sniff_debug_from);
+		                           
+		                           var args = packet.data || [];
+
+
+		                           if (null != packet.id) {
+
+			                           args.push(this.ack(packet.id));
+		                           }
+
+		                           if (this.connected) {
+			                           emit.apply(this, args);
+		                           } else {
+			                           this.receiveBuffer.push(args);
+		                           }
+	                           };
+
+                           }
+
+
+                         }, 1);</script>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" defer="defer" async="" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/piwik.js"></script><script type="text/javascript">
+<!-- //
+
+// Version 1.9 stripped by Creativyst SS & JavaScript Compressor v2.2c (http://www.creativyst.com/Prod/3/)
+function tabberObj(argsObj)
+{ var arg; this.div = null; this.classMain = "tabber"; this.classMainLive = "tabberlive"; this.classTab = "tabbertab"; this.classTabDefault = "tabbertabdefault"; this.classNav = "tabbernav"; this.classTabHide = "tabbertabhide"; this.classNavActive = "tabberactive"; this.titleElements = ['h2','h3','h4','h5','h6']; this.titleElementsStripHTML = true; this.removeTitle = true; this.addLinkId = false; this.linkIdFormat = '<tabberid>nav<tabnumberone>'; for (arg in argsObj) { this[arg] = argsObj[arg];}
+this.REclassMain = new RegExp('\\b' + this.classMain + '\\b', 'gi'); this.REclassMainLive = new RegExp('\\b' + this.classMainLive + '\\b', 'gi'); this.REclassTab = new RegExp('\\b' + this.classTab + '\\b', 'gi'); this.REclassTabDefault = new RegExp('\\b' + this.classTabDefault + '\\b', 'gi'); this.REclassTabHide = new RegExp('\\b' + this.classTabHide + '\\b', 'gi'); this.tabs = new Array(); if (this.div) { this.init(this.div); this.div = null;}
+}
+tabberObj.prototype.init = function(e)
+{ var
+childNodes, i, i2, t, defaultTab=0, DOM_ul, DOM_li, DOM_a, aId, headingElement; if (!document.getElementsByTagName) { return false;}
+if (e.id) { this.id = e.id;}
+this.tabs.length = 0; childNodes = e.childNodes; for(i=0; i < childNodes.length; i++) { if(childNodes[i].className &&
+childNodes[i].className.match(this.REclassTab)) { t = new Object(); t.div = childNodes[i]; this.tabs[this.tabs.length] = t; if (childNodes[i].className.match(this.REclassTabDefault)) { defaultTab = this.tabs.length-1;}
+}
+}
+DOM_ul = document.createElement("ul"); DOM_ul.className = this.classNav; for (i=0; i < this.tabs.length; i++) { t = this.tabs[i]; t.headingText = t.div.title; if (this.removeTitle) { t.div.title = '';}
+if (!t.headingText) { for (i2=0; i2<this.titleElements.length; i2++) { headingElement = t.div.getElementsByTagName(this.titleElements[i2])[0]; if (headingElement) { t.headingText = headingElement.innerHTML; if (this.titleElementsStripHTML) { t.headingText.replace(/<br>/gi," "); t.headingText = t.headingText.replace(/<[^>]+>/g,"");}
+break;}
+}
+}
+if (!t.headingText) { t.headingText = i + 1;}
+DOM_li = document.createElement("li"); t.li = DOM_li; DOM_a = document.createElement("a"); DOM_a.appendChild(document.createTextNode(t.headingText)); DOM_a.href = "javascript:void(null);"; DOM_a.title = t.headingText; DOM_a.onclick = this.navClick; DOM_a.tabber = this; DOM_a.tabberIndex = i; if (this.addLinkId && this.linkIdFormat) { aId = this.linkIdFormat; aId = aId.replace(/<tabberid>/gi, this.id); aId = aId.replace(/<tabnumberzero>/gi, i); aId = aId.replace(/<tabnumberone>/gi, i+1); aId = aId.replace(/<tabtitle>/gi, t.headingText.replace(/[^a-zA-Z0-9\-]/gi, '')); DOM_a.id = aId;}
+DOM_li.appendChild(DOM_a); DOM_ul.appendChild(DOM_li);}
+e.insertBefore(DOM_ul, e.firstChild); e.className = e.className.replace(this.REclassMain, this.classMainLive); this.tabShow(defaultTab); if (typeof this.onLoad == 'function') { this.onLoad({tabber:this});}
+return this;}; tabberObj.prototype.navClick = function(event)
+{ var
+rVal, a, self, tabberIndex, onClickArgs; a = this; if (!a.tabber) { return false;}
+self = a.tabber; tabberIndex = a.tabberIndex; a.blur(); if (typeof self.onClick == 'function') { onClickArgs = {'tabber':self, 'index':tabberIndex, 'event':event}; if (!event) { onClickArgs.event = window.event;}
+rVal = self.onClick(onClickArgs); if (rVal === false) { return false;}
+}
+self.tabShow(tabberIndex); return false;}; tabberObj.prototype.tabHideAll = function()
+{ var i; for (i = 0; i < this.tabs.length; i++) { this.tabHide(i);}
+}; tabberObj.prototype.tabHide = function(tabberIndex)
+{ var div; if (!this.tabs[tabberIndex]) { return false;}
+div = this.tabs[tabberIndex].div; if (!div.className.match(this.REclassTabHide)) { div.className += ' ' + this.classTabHide;}
+this.navClearActive(tabberIndex); return this;}; tabberObj.prototype.tabShow = function(tabberIndex)
+{ var div; if (!this.tabs[tabberIndex]) { return false;}
+this.tabHideAll(); div = this.tabs[tabberIndex].div; div.className = div.className.replace(this.REclassTabHide, ''); this.navSetActive(tabberIndex); if (typeof this.onTabDisplay == 'function') { this.onTabDisplay({'tabber':this, 'index':tabberIndex});}
+return this;}; tabberObj.prototype.navSetActive = function(tabberIndex)
+{ this.tabs[tabberIndex].li.className = this.classNavActive; return this;}; tabberObj.prototype.navClearActive = function(tabberIndex)
+{ this.tabs[tabberIndex].li.className = ''; return this;}; function tabberAutomatic(tabberArgs)
+{ var
+tempObj, divs, i; if (!tabberArgs) { tabberArgs = {};}
+tempObj = new tabberObj(tabberArgs); divs = document.getElementsByTagName("div"); for (i=0; i < divs.length; i++) { if (divs[i].className &&
+divs[i].className.match(tempObj.REclassMain)) { tabberArgs.div = divs[i]; divs[i].tabber = new tabberObj(tabberArgs);}
+}
+return this;}
+function tabberAutomaticOnLoad(tabberArgs)
+{ var oldOnLoad; if (!tabberArgs) { tabberArgs = {};}
+oldOnLoad = window.onload; if (typeof window.onload != 'function') { window.onload = function() { tabberAutomatic(tabberArgs);};} else { window.onload = function() { oldOnLoad(); tabberAutomatic(tabberArgs);};}
+}
+if (typeof tabberOptions == 'undefined') { tabberAutomaticOnLoad();} else { if (!tabberOptions['manualStartup']) { tabberAutomaticOnLoad(tabberOptions);}
+}
+
+//-->
+</script>
+
+
+<style type="text/css">
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+ display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+ margin-top:1em;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav
+{
+ margin:0;
+ padding: 3px 0;
+ border-bottom: 1px solid #778;
+ font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li
+{
+ list-style: none;
+ margin: 0;
+ display: inline;
+}
+
+ul.tabbernav li a
+{
+ padding: 3px 0.5em;
+ margin-left: 3px;
+ border: 1px solid #778;
+ border-bottom: none;
+ background: #DDE;
+ text-decoration: none;
+}
+
+ul.tabbernav li a:link { color: #448; }
+ul.tabbernav li a:visited { color: #667; }
+
+ul.tabbernav li a:hover
+{
+ color: #000;
+ background: #AAE;
+ border-color: #227;
+}
+
+ul.tabbernav li.tabberactive a
+{
+ background-color: #fff;
+ border-bottom: 1px solid #fff;
+}
+
+ul.tabbernav li.tabberactive a:hover
+{
+ color: #000;
+ background: white;
+ border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+ padding:5px;
+ border:1px solid #aaa;
+ border-top:0;
+
+ /* If you don't want the tab size changing whenever a tab is changed
+    you can set a fixed height */
+
+ /* height:200px; */
+
+ /* If you set a fix height set overflow to auto and you will get a
+    scrollbar when necessary */
+
+ /* overflow:auto; */
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+ display:none;
+}
+.tabberlive .tabbertab h3 {
+ display:none;
+}
+
+/* Example of using an ID to set different styles for the tabs on the page */
+.tabberlive#tab1 {
+}
+.tabberlive#tab2 {
+}
+.tabberlive#tab2 .tabbertab {
+ height:200px;
+ overflow:auto;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="index,nofollow">
+
+<title>Portables Mikrokoptertool - MikrokopterWiki</title>
+<script type="text/javascript" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/common.js"></script>
+
+<script type="text/javascript">
+<!--
+var search_hint = "Suche";
+//-->
+</script>
+
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin_static1910/mk-style3/css/msie.css">
+<![endif]-->
+
+
+<link rel="alternate" title="MikrokopterWiki: Portables Mikrokoptertool" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?diffs=1&amp;show_att=1&amp;action=rss_rc&amp;unique=0&amp;page=Portables+Mikrokoptertool&amp;ddiffs=1" type="application/rss+xml">
+
+
+<link rel="Start" href="http://wiki.mikrokopter.de/StartSeite">
+<link rel="Alternate" title="Wiki Quelltext" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=raw">
+<link rel="Alternate" media="print" title="Druckansicht" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=print">
+<link rel="Appendix" title="PKT_31_bot.jpg" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=AttachFile&amp;do=view&amp;target=PKT_31_bot.jpg">
+<link rel="Appendix" title="P_Koptertool V31SCH" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=AttachFile&amp;do=view&amp;target=P_Koptertool+V31SCH">
+<link rel="Appendix" title="P_Koptertool V31SCH.pdf" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=AttachFile&amp;do=view&amp;target=P_Koptertool+V31SCH.pdf">
+<link rel="Appendix" title="Ü_Koptertool V31SCH.pdf" href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=AttachFile&amp;do=view&amp;target=%C3%9C_Koptertool+V31SCH.pdf">
+<link rel="Search" href="http://wiki.mikrokopter.de/SeiteFinden">
+<link rel="Index" href="http://wiki.mikrokopter.de/TitelIndex">
+<link rel="Glossary" href="http://wiki.mikrokopter.de/WortIndex">
+<link rel="Help" href="http://wiki.mikrokopter.de/HilfeZumFormatieren">
+</head>
+
+<body dir="ltr" style="margin-top: 170px;" lang="de">
+<div id="usebbnetnavigation">
+<ul>
+<li><a href="http://www.mikrokopter.de/" target="_blank">MikroKopter.de</a></li> 
+<li><a href="https://doc.mikrokopter.de/">Wiki (neuere Version)</a></li> 
+<li><a href="http://wiki.mikrokopter.de/">Wiki</a></li> 
+<li><a href="https://www.mikrocontroller.com/" target="_blank">SHOP</a></li> 
+<span class="rightalign">
+<li><a href="http://www.mikrokopter.de/de/datenschutz" target="_blank">Datenschutz</a></li>
+<li><a href="http://www.mikrokopter.de/de/impressum" target="_blank">Impressum</a></li>
+</span> 
+</ul></div>
+<div id="mypage">
+<div id="header">
+ <div class="superHeader">
+  <div class="right">
+<ul id="username"><li><a href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool?action=login" id="login" rel="nofollow">Anmelden</a></li></ul>
+  </div>
+ </div>
+ <div class="superHeader">
+ </div>
+<div class="toppanel">
+<span class="anchor" id="line-1"></span><span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span><ul><li><p class="line891"><a href="http://wiki.mikrokopter.de/Download">Download</a> <span class="anchor" id="line-4"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/MK-Funktion">Funktionen</a> <span class="anchor" id="line-5"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Nachbau">Modelle</a> <span class="anchor" id="line-6"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Software">MK-Tool</a> <span class="anchor" id="line-7"></span></p></li><li><p class="line891"><a class="https" href="https://doc.mikrokopter.de/">zur neuen Homepage</a> <span class="anchor" id="line-8"></span></p></li></ul>
+</div>
+ <div class="midHeader">
+ <div class="mklogo"> <a href="http://www.mikrokopter.de/ucwiki/"><img src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/mk-logo1.png" width="160"> </a></div>
+  <div id="locationline">
+
+  </div>
+ </div>
+
+</div>
+<div id="fullcontent">
+<div id="sidebar">
+
+<form id="searchform" method="get" action="/Portables%20Mikrokoptertool">
+<div>
+<input type="hidden" name="action" value="fullsearch">
+<input type="hidden" name="context" value="180">
+<label for="searchinput" style="display: none;">Suchen:</label>
+<input id="searchinput" type="text" name="value" value="Suche" size="17" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" class="disabled">
+<input id="fullsearch" name="fullsearch" type="submit" value="Text" alt="Search Full Text" disabled="disabled">
+<input id="titlesearch" name="titlesearch" type="submit" value="Titel" alt="Search Titles" disabled="disabled">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div class="sidepanel">
+<span class="anchor" id="line-1-1"></span><span class="anchor" id="line-2-1"></span><span class="anchor" id="line-3-1"></span><ul><li><p class="line891"><strong>Neue Homepage</strong>  <span class="anchor" id="line-4-1"></span></p><ul><li><p class="line891"><a class="https" href="https://doc.mikrokopter.de/">WIKI (NEU)</a> <span class="anchor" id="line-5-1"></span><span class="anchor" id="line-6-1"></span></p></li></ul></li><li class="gap"><p class="line891"><strong>MikroKopter</strong> <span class="anchor" id="line-7-1"></span></p><ul><li><p class="line891"><a href="http://wiki.mikrokopter.de/StartSeite">Startseite</a> <span class="anchor" id="line-8-1"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/MK-Funktion">Funktionen</a> <span class="anchor" id="line-9"></span></p></li><li><p class="line891"><a class="http" href="http://forum.mikrokopter.de/">Forum</a> <span class="anchor" id="line-10"></span></p></li><li><p class="line891"><a class="https" href="https://www.mikrocontroller.com/">Shop</a> <span class="anchor" id="line-11"></span><span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span></p></li></ul></li><li class="gap"><p class="line891"><strong>Grundlagen</strong> <span class="anchor" id="line-14"></span></p><ul><li><p class="line891"><a href="http://wiki.mikrokopter.de/MikroKopterEinstieg">Einstieg</a> <span class="anchor" id="line-15"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/VideoListe">Video</a> <span class="anchor" id="line-16"></span><span class="anchor" id="line-17"></span><span class="anchor" id="line-18"></span></p></li></ul></li><li class="gap"><p class="line891"><strong>Technisches</strong> <span class="anchor" id="line-19"></span></p><ul><li><p class="line891"><a href="http://wiki.mikrokopter.de/MK-Board">MK-Baugruppen</a> <span class="anchor" id="line-20"></span></p></li><li><p class="line891"><strong><a href="http://wiki.mikrokopter.de/NachbauAnleitung">Nachbau-Anleitung</a></strong> <span class="anchor" id="line-21"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Kalibrieren">Kalibrierungen</a> <span class="anchor" id="line-22"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Sender">Sender/Empfänger</a> <span class="anchor" id="line-23"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Manual">Anleitungen</a> <span class="anchor" id="line-24"></span><span class="anchor" id="line-25"></span></p></li></ul></li><li class="gap"><p class="line891"><strong>Software</strong> <span class="anchor" id="line-26"></span></p><ul><li><p class="line891"><a href="http://wiki.mikrokopter.de/Software">MikroKopter-Tool</a> <span class="anchor" id="line-27"></span></p></li><li><p class="line891"><a href="http://wiki.mikrokopter.de/Download">Download</a> <span class="anchor" id="line-28"></span><span class="anchor" id="line-29"></span><span class="anchor" id="line-30"></span></p></li></ul></li><li class="gap"><p class="line891"><a href="http://wiki.mikrokopter.de/TitelIndex">Alle Seiten</a>  <span class="anchor" id="line-31"></span><span class="anchor" id="line-32"></span><span class="anchor" id="line-33"></span></p></li></ul>
+</div>
+
+
+
+</div>
+<div id="page" dir="ltr" lang="de">
+
+
+<div dir="ltr" id="content" lang="de"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1-2"></span><ul><li style="list-style-type:none"><p class="line891"></p><div class="table-of-contents"><p class="table-of-contents-heading">Inhaltsverzeichnis</p><ol><li>
+<a href="#PKT_.3D_Portables_Kopter_Tool">PKT = Portables Kopter Tool</a><ol><li>
+<a href="#Zur_Geschichte">Zur Geschichte</a><ol><li>
+<a href="#Die_verschiedenen_Hardwareversionen:">Die verschiedenen Hardwareversionen:</a></li></ol></li><li>
+<a href="#Infos_zu_den_verschiedenen_Softwareversionen_des_PKT_3.9">Infos zu den verschiedenen Softwareversionen des PKT 3.9</a></li><li>
+<a href="#Portables_Mikrokoptertool_V3.9_.28Oktober_2011.29">Portables Mikrokoptertool V3.9 (Oktober 2011)</a><ol><li>
+<a href="#Anschl.2BAPw-sse_des_PKT_Hardware_3.9">Anschlüsse des PKT Hardware 3.9</a></li><li>
+<a href="#Anschluss_Smart_OSD">Anschluss Smart OSD</a></li><li>
+<a href="#Link_f.2BAPw-r_alle_Dateien_im_SVN">Link für alle Dateien im SVN</a></li><li>
+<a href="#Best.2BAPw-ckung_TOP">Bestückung TOP</a></li><li>
+<a href="#Best.2BAPw-ckung_BOT">Bestückung BOT</a></li><li>
+<a href="#Schaltplan_V3.9m">Schaltplan V3.9m</a></li><li>
+<a href="#Schaltplan_V3.9x">Schaltplan V3.9x</a></li><li>
+<a href="#St.2BAPw-ckliste">Stückliste</a></li><li>
+<a href="#Best.2BAPw-ckung">Bestückung</a><ol><li>
+<a href="#Lipoladeregler">Lipoladeregler</a></li><li>
+<a href="#Stromversorgungsteil_.2B-5V_mit_dem_Spannungswandler">Stromversorgungsteil +5V mit dem Spannungswandler</a></li><li>
+<a href="#Spannungs.2BAPw-berwachung">Spannungsüberwachung</a></li><li>
+<a href="#Restliche_Bauteile">Restliche Bauteile</a></li></ol></li><li>
+<a href="#Bootlader_flashen">Bootlader flashen</a></li><li>
+<a href="#Software_flashen">Software flashen</a></li><li>
+<a href="#PKT_Updatetool">PKT Updatetool</a></li><li>
+<a href="#Module_best.2BAPw-cken">Module bestücken</a></li><li>
+<a href="#Bluetooth">Bluetooth</a><ol><li>
+<a href="#Bluetooth_manuell_konfigurieren">Bluetooth manuell konfigurieren</a></li></ol></li><li>
+<a href="#Ben.2BAPY-tigte_AT_Befehle">Benötigte AT Befehle</a></li><li>
+<a href="#Bluetooth_im_PC">Bluetooth im PC</a></li><li>
+<a href="#Funktionen_der_LED.27s">Funktionen der LED's</a></li><li>
+<a href="#FT232_USB-Chip_konfigurieren">FT232 USB-Chip konfigurieren</a></li><li>
+<a href="#Tipps_und_Tricks">Tipps und Tricks</a></li><li>
+<a href="#Fehler_und_Ursachen">Fehler und Ursachen</a></li><li>
+<a href="#A.2BAMQ-nderungen">Änderungen</a><ol><li>
+<a href="#Patch_1:_Lipo_Spannungs.2BAPw-berwachung">Patch 1: Lipo Spannungsüberwachung</a></li><li>
+<a href="#Patch_2:_SV2_Patch">Patch 2: SV2 Patch</a></li><li>
+<a href="#Patch_3:_WiFly_Patch">Patch 3: WiFly Patch</a></li><li>
+<a href="#Patch4:_BLE_Bluetooth_4.0">Patch4: BLE Bluetooth 4.0</a></li></ol></li></ol></li></ol></li></ol></div> <span class="anchor" id="line-2-2"></span><span class="anchor" id="line-3-2"></span></li></ul><p class="line867">
+</p><h1 id="PKT_.3D_Portables_Kopter_Tool">PKT = Portables Kopter Tool</h1>
+<span class="anchor" id="line-4-2"></span><p class="line867">
+</p><h2 id="Zur_Geschichte">Zur Geschichte</h2>
+<span class="anchor" id="line-5-2"></span><p class="line874">Das 
+portable Mikrokoptertool ist mal aus einer Idee von THKAIS 2008 
+entstanden. Ursprünglich mal als einfache Version zum Nachbauen mit 
+Standardbauteilen (kein SMD). Mittlerweile gibt es verschiedene 
+Hardwareversion, die Neuen in der Regel mit SMD-Bauteilen, weil es 
+zusätzliche Anforderungen gab, die auf einer möglichst kleinen 
+Leiterplatte Platz finden sollten. Heisst ja portables Mikrokopertool 
+und nicht Laptop :-;. <span class="anchor" id="line-6-2"></span><span class="anchor" id="line-7-2"></span></p><p class="line862">Der Startthread im Forum ist hier zu finden: <a class="http" href="http://forum.mikrokopter.de/topic-post48357.html#post48357">http://forum.mikrokopter.de/topic-post48357.html#post48357</a> <span class="anchor" id="line-8-2"></span><span class="anchor" id="line-9-1"></span></p><p class="line874">Nach
+ einer Zeit des Stillstand begann das Tool Anfang 2010 wieder zu leben 
+und wurde von SEBSEB7 Software- und Hardwaretechnisch erweitert. <span class="anchor" id="line-10-1"></span><span class="anchor" id="line-11-1"></span></p><p class="line862">WOGGLE hat den Quellcode und Schaltung Anfang 2010 im SVN abgelegt : <a class="http" href="http://forum.mikrokopter.de/topic-post182118.html#post182118">http://forum.mikrokopter.de/topic-post182118.html#post182118</a> <span class="anchor" id="line-12-1"></span><span class="anchor" id="line-13-1"></span></p><p class="line874">Das
+ gesamte Projekt ist von den ursprünglichen Autoren als Opensource 
+Projekt gedacht und soll in dem Sinne jetzt auch weitergeführt und 
+dokumentiert werden. <span class="anchor" id="line-14-1"></span><span class="anchor" id="line-15-1"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-16-1"></span>
+</p><h3 id="Die_verschiedenen_Hardwareversionen:">Die verschiedenen Hardwareversionen:</h3>
+<span class="anchor" id="line-17-1"></span><p class="line862">1. Version Thomas Kaiser ist hier zu finden: <a class="http" href="http://www.ft-fanpage.de/mikrokopter/">http://www.ft-fanpage.de/mikrokopter/</a> <span class="anchor" id="line-18-1"></span><span class="anchor" id="line-19-1"></span></p><p class="line862">2. Peter Plischka hat auf seiner Webseite eine Dokumentation veröffentlicht <a class="http" href="http://plischka.at/Multi_Box.html">http://plischka.at/Multi_Box.html</a> <span class="anchor" id="line-20-1"></span><span class="anchor" id="line-21-1"></span></p><p class="line874">3. Sebastian Böhm, Hardware 1.2 Prozessor Atmega644 <span class="anchor" id="line-22-1"></span><span class="anchor" id="line-23-1"></span></p><p class="line874">4. Sebastian Böhm, Hardware 1.2 Prozessor Atmega644P <span class="anchor" id="line-24-1"></span><span class="anchor" id="line-25-1"></span></p><p class="line874">5. Christian Brandtner, Hardware 3.9x Prozessor Atmega1284P <span class="anchor" id="line-26-1"></span><span class="anchor" id="line-27-1"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-28-1"></span></p><hr><p class="line874"> <span class="anchor" id="line-29-1"></span>Die Software im SVN :<a class="http" href="http://svn.mikrokopter.de/listing.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/&amp;#A5a1560c250e4dfe7278522ccd5f7350c">http://svn.mikrokopter.de/listing.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2F&amp;#A5a1560c250e4dfe7278522ccd5f7350c</a> <span class="anchor" id="line-30-1"></span><span class="anchor" id="line-31-1"></span></p><p class="line867">
+</p><h2 id="Infos_zu_den_verschiedenen_Softwareversionen_des_PKT_3.9">Infos zu den verschiedenen Softwareversionen des PKT 3.9</h2>
+<span class="anchor" id="line-32-1"></span><p class="line874">Das Wiki ist in Hardware (hier) und Software aufgeteilt <span class="anchor" id="line-33-1"></span><span class="anchor" id="line-34"></span></p><p class="line867"><strong>Link zum PKT Software Wiki <a href="http://wiki.mikrokopter.de/Portables%20Mikrokoptertool/Doku">Portables Mikrokoptertool/Doku</a></strong> <span class="anchor" id="line-35"></span><span class="anchor" id="line-36"></span></p><p class="line867">
+</p><h2 id="Portables_Mikrokoptertool_V3.9_.28Oktober_2011.29">Portables Mikrokoptertool V3.9 (Oktober 2011)</h2>
+<span class="anchor" id="line-37"></span><p class="line874">Dies ist ein
+ Redesign des portablen Mikrokoptertool aus dem Mikrokopterforum. Die 
+Schaltung ist kompatibel mit dem ursprünglichen Tool, aber mit 
+Erweiterungen. <span class="anchor" id="line-38"></span><span class="anchor" id="line-39"></span></p><p class="line874">Ziel
+ ist es die Hard- und Software weiter unter GNU/GPL zu stellen, so das 
+jeder die Möglichkeit hat diese weiterzuentwickeln und zu pflegen. <span class="anchor" id="line-40"></span><span class="anchor" id="line-41"></span></p><p class="line874">Mittlerweile (2012) ist die Software soweit gewachsen, das nur noch die Leiterplatte 3.9 mit allen Features funktioniert. <span class="anchor" id="line-42"></span><span class="anchor" id="line-43"></span></p><p class="line874">Unterstützte Hardwarefeatures: <span class="anchor" id="line-44"></span><span class="anchor" id="line-45"></span></p><p class="line867"><strong>Standard:</strong> <span class="anchor" id="line-46"></span><span class="anchor" id="line-47"></span></p><p class="line874">4 Tasten für Menüsteuerung <span class="anchor" id="line-48"></span><span class="anchor" id="line-49"></span></p><p class="line874">Anschluss an FC <span class="anchor" id="line-50"></span><span class="anchor" id="line-51"></span></p><p class="line874">DOGM Grafikdisplay <span class="anchor" id="line-52"></span><span class="anchor" id="line-53"></span></p><p class="line874">2 x Servoanschlüsse <span class="anchor" id="line-54"></span><span class="anchor" id="line-55"></span></p><p class="line874">ISP Anschluss <span class="anchor" id="line-56"></span><span class="anchor" id="line-57"></span></p><p class="line874">I2C Anschluss <span class="anchor" id="line-58"></span><span class="anchor" id="line-59"></span></p><p class="line867"><strong>Erweiterungen:</strong> <span class="anchor" id="line-60"></span><span class="anchor" id="line-61"></span></p><p class="line874">USB-Anschluss für Softwareupload,  GPS-Ausgabe, etc. <span class="anchor" id="line-62"></span><span class="anchor" id="line-63"></span></p><p class="line874">WI.232 onboard <span class="anchor" id="line-64"></span><span class="anchor" id="line-65"></span></p><p class="line874">Bluetooth onboard <span class="anchor" id="line-66"></span><span class="anchor" id="line-67"></span></p><p class="line874">Akkuanschluss und Ein/Aus Taster <span class="anchor" id="line-68"></span><span class="anchor" id="line-69"></span></p><p class="line874">Summer <span class="anchor" id="line-70"></span><span class="anchor" id="line-71"></span></p><p class="line874">Leiterplatte passt genau in STRAPU-Box 2062 inkl. Akkus (Lipo 1S) <span class="anchor" id="line-72"></span><span class="anchor" id="line-73"></span></p><p class="line867"><strong>Unterstützte Softwarefeatures:</strong> <span class="anchor" id="line-74"></span><span class="anchor" id="line-75"></span></p><p class="line874">Anzeige und Konfiguration der Mikrokopterparameter <span class="anchor" id="line-76"></span><span class="anchor" id="line-77"></span></p><p class="line874">Anzeige GPS-Daten <span class="anchor" id="line-78"></span><span class="anchor" id="line-79"></span></p><p class="line874">Summer für Unterspannungswarnung <span class="anchor" id="line-80"></span><span class="anchor" id="line-81"></span></p><p class="line874">Einstellungen für Display <span class="anchor" id="line-82"></span><span class="anchor" id="line-83"></span></p><p class="line874">MKUSB Funktion über Kabel oder Wi232, PC über USB oder Bluetooth <span class="anchor" id="line-84"></span><span class="anchor" id="line-85"></span></p><p class="line874">Konfiguration Wi.232 <span class="anchor" id="line-86"></span><span class="anchor" id="line-87"></span></p><p class="line874">Konfiguration Bluetooth <span class="anchor" id="line-88"></span><span class="anchor" id="line-89"></span></p><p class="line874">BL-Ctrl Test <span class="anchor" id="line-90"></span><span class="anchor" id="line-91"></span></p><p class="line874">Die Software ist unter der Lizenz GNU/GPL frei verfügbar und wird im Mikrokopter SVN zur Verfügung gestellt. <span class="anchor" id="line-92"></span><span class="anchor" id="line-93"></span></p><p class="line874">Das gleiche gilt auch für die Hardware (Eagle Schaltung und Board) <span class="anchor" id="line-94"></span><span class="anchor" id="line-95"></span></p><p class="line867"><strong>Fertig eingebaut im Gehäuse:</strong> <span class="anchor" id="line-96"></span><span class="anchor" id="line-97"></span></p><p class="line867"><a class="http" href="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39.jpg.html"><img alt="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39.jpg.html" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main_005.jpeg" title="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39.jpg.html"></a> <span class="anchor" id="line-98"></span><span class="anchor" id="line-99"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-100"></span>
+</p><h3 id="Anschl.2BAPw-sse_des_PKT_Hardware_3.9">Anschlüsse des PKT Hardware 3.9</h3>
+<span class="anchor" id="line-101"></span><p class="line867"><a class="http" href="http://gallery.mikrokopter.de/main.php/v/uploads/Anschl__sse_PKT.jpeg.html"><img alt="http://gallery.mikrokopter.de/main.php/v/uploads/Anschl__sse_PKT.jpeg.html" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main_003.jpeg" title="http://gallery.mikrokopter.de/main.php/v/uploads/Anschl__sse_PKT.jpeg.html"></a> <span class="anchor" id="line-102"></span><span class="anchor" id="line-103"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-104"></span>
+</p><h3 id="Anschluss_Smart_OSD">Anschluss Smart OSD</h3>
+<span class="anchor" id="line-105"></span><p class="line862">Smart OSD kann am SV2 angeschlossen werden, hierzu werden die Leitungen <a class="nonexistent" href="http://wiki.mikrokopter.de/TxD1">TxD1</a> und GND verwendet. Achtung: <a class="nonexistent" href="http://wiki.mikrokopter.de/RxD1">RxD1</a> darf nicht angeschlossen werden. <span class="anchor" id="line-106"></span><span class="anchor" id="line-107"></span></p><p class="line867"><img alt="PKT_SmartOSD" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main_006.jpeg" title="PKT_SmartOSD" width="430" height="159"> <span class="anchor" id="line-108"></span><span class="anchor" id="line-109"></span></p><p class="line874">Zur Aktivierung der Ausgabe muss im OSD Setup unter dem Menüpunkt "Navidaten an SV2" ein "Ja" gesetzt werden. <span class="anchor" id="line-110"></span><span class="anchor" id="line-111"></span></p><p class="line874">Die Ausgabe der Navidaten ans Smart OSD erfolgt sobald man sich im OSD Screen befindet. <span class="anchor" id="line-112"></span><span class="anchor" id="line-113"></span></p><p class="line867"><strong>Zur Zeit noch Betastatus</strong> <span class="anchor" id="line-114"></span><span class="anchor" id="line-115"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-116"></span>
+</p><h3 id="Link_f.2BAPw-r_alle_Dateien_im_SVN">Link für alle Dateien im SVN</h3>
+<span class="anchor" id="line-117"></span><p class="line862">Link zum SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/listing.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/&amp;#a1b330a2b5f5f17ae7e454efe1d4cd50f">http://svn.mikrokopter.de/websvn/listing.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2F&amp;#a1b330a2b5f5f17ae7e454efe1d4cd50f</a> <span class="anchor" id="line-118"></span><span class="anchor" id="line-119"></span></p><p class="line867">
+</p><h3 id="Best.2BAPw-ckung_TOP">Bestückung TOP</h3>
+<span class="anchor" id="line-120"></span><p class="line862">siehe SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/PCB-Board_3_9m/Release_PKT_V3_9m_TOP_Values.pdf">http://svn.mikrokopter.de/filedetails.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2FRelease_PKT_V3_9m_TOP.pdf</a> <span class="anchor" id="line-121"></span><span class="anchor" id="line-122"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-123"></span>
+</p><h3 id="Best.2BAPw-ckung_BOT">Bestückung BOT</h3>
+<span class="anchor" id="line-124"></span><p class="line862">siehe SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/PCB-Board_3_9m/Release_PKT_V3_9m_BOT_Values.pdf">http://svn.mikrokopter.de/filedetails.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2FRelease_PKT_V3_9m_BOT.pdf</a> <span class="anchor" id="line-125"></span><span class="anchor" id="line-126"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-127"></span>
+</p><h3 id="Schaltplan_V3.9m">Schaltplan V3.9m</h3>
+<span class="anchor" id="line-128"></span><p class="line862">siehe SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/PCB-Board_3_9m/Release_PKT_V3_9m_sch_A3.pdf">http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2FPCB-Board_3_9m%2FRelease_PKT_V3_9m_sch_A3.pdf</a> <span class="anchor" id="line-129"></span><span class="anchor" id="line-130"></span></p><p class="line867">
+</p><h3 id="Schaltplan_V3.9x">Schaltplan V3.9x</h3>
+<span class="anchor" id="line-131"></span><p class="line862">siehe SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/PCB-Board_3_9x/PKT_CB28112012_V3_9x_sch.pdf">http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2FPCB-Board_3_9x%2FPKT_CB28112012_V3_9x_sch.pdf</a> <span class="anchor" id="line-132"></span><span class="anchor" id="line-133"></span></p><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-134"></span>Aufbauanleitung: <span class="anchor" id="line-135"></span><span class="anchor" id="line-136"></span></p><p class="line862">siehe SVN: <a class="http" href="http://svn.mikrokopter.de/websvn/filedetails.php?repname=Projects&amp;path=/Transportables_Koptertool/tags/V3.x/HW_Koptertool3_9/PCB-Board_3_9m/Aufbau_PKT3_9m_V18.pdf">http://svn.mikrokopter.de/filedetails.php?repname=Projects&amp;path=%2FTransportables_Koptertool%2Ftags%2FV3.x%2FHW_Koptertool3_9%2FAufbau_PKT3_9m_V15_de.pdf</a> <span class="anchor" id="line-137"></span><span class="anchor" id="line-138"></span></p><ul><li style="list-style-type:none"><span class="anchor" id="line-139"></span><span class="anchor" id="line-140"></span></li></ul><p class="line867"></p><hr><p class="line874"> <span class="anchor" id="line-141"></span>
+</p><h3 id="St.2BAPw-ckliste">Stückliste</h3>
+<span class="anchor" id="line-142"></span><ul><li style="list-style-type:none">Als
+ erstes müssen die Bauteile sortiert werden. Teilweise sind sie 
+beschriftet und die anderen kann man mengenmässig zuordnen. Ich setze 
+einmal voraus das Widerstände von Kondensatoren oder LED unterschieden 
+werden können. In der Teileliste sind die typischen Merkmale der 
+Bauteile vermerkt um sie leichter identifizieren zu können. Bei z.B. bei
+ den LED's gibt es nur die Unterscheidung nach der Menge, bei anderen 
+Bauteilen erkannt man an der Form. <span class="anchor" id="line-143"></span><p class="line862">Stückliste,<a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-144"></span></p></li><li style="list-style-type:none"><span class="anchor" id="line-145"></span></li><li style="list-style-type:none"><p class="line891"><strong>Wichtig: D3 nicht bestücken!!!</strong>
+ Die Einbaulage von Q1 ist egal, passt immer. Achtung R35 ist 0 Ohm, 
+d.h. eine Lötbrücke, Bluetoothantenne ist nicht optional, als 3,1cm 
+Draht anlöten <span class="anchor" id="line-146"></span></p></li><li style="list-style-type:none"><p class="line891"><strong>Wichtiger Hinweis: </strong> <strong>am PKT darf nur ein 1S Akku(3,7V) angeschlossen werden, die maximale Spannung am Batterieanschluss darf 5V nicht überschreiten. </strong> <strong>Auf Polung achten!</strong>
+ Im Bausatz nicht enthalten ist die Bluetoothantenne,ISP Stecker, 
+Gehäuse, LIPO. Die rot markierten Bauteile sind optional und werden 
+nicht bestückt. In der Leiterplatte befinden sich mittig unter den 
+Tasten Löcher, diese kann man als Bohrhilfe für die Tastenlöcher im 
+Gehäuse verwenden <span class="anchor" id="line-147"></span></p></li><li style="list-style-type:none"><span class="anchor" id="line-148"></span></li><li style="list-style-type:none"><span class="anchor" id="line-149"></span></li><li style="list-style-type:none">. <span class="anchor" id="line-150"></span><ul><li style="list-style-type:none"><p class="line891"><strong>!!!!WICHTIGER Hinweis!!</strong>!! <span class="anchor" id="line-151"></span><span class="anchor" id="line-152"></span></p></li><li class="gap" style="list-style-type:none"><span class="anchor" id="line-153"></span></li><li style="list-style-type:none"><p class="line891"><strong>Der
+  Lötjumper SJ1 zur Umschaltung der Spannung an SV2 von 5V auf 3,3V darf
+  unter keinen Umständen auf 3,3V gestellt werden. Das führt zur  
+sofortigen Zerstörung von Display, BTM222 und Wi232.    </strong> <span class="anchor" id="line-154"></span><span class="anchor" id="line-155"></span></p></li><li class="gap" style="list-style-type:none"><p class="line891"><strong>Der Grund: Layoutfehler</strong> <span class="anchor" id="line-156"></span><span class="anchor" id="line-157"></span></p></li><li class="gap" style="list-style-type:none"><span class="anchor" id="line-158"></span></li></ul></li><li style="list-style-type:none"><span class="anchor" id="line-159"></span><span class="anchor" id="line-160"></span></li></ul><p class="line867">
+</p><h3 id="Best.2BAPw-ckung">Bestückung</h3>
+<span class="anchor" id="line-161"></span><ul><li style="list-style-type:none">Die Bestückung der Leiterplatte sollte schrittweise erfolgen. <span class="anchor" id="line-162"></span><span class="anchor" id="line-163"></span></li></ul><p class="line867">
+</p><h4 id="Lipoladeregler">Lipoladeregler</h4>
+<span class="anchor" id="line-164"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-165"></span><span class="anchor" id="line-166"></span></li><li class="gap" style="list-style-type:none"><p class="line891"><strong>Hinweis zum Akku, es muss ein 1S LIPO oder LI-ION Akku sein, also Zellenspannung 3,7 V</strong>.
+ Zuerst wird der Lipo Laderegler und die USB-Buchse bestückt. Hier sind 
+noch die Lötjumper SJ2 und SJ3 zu beachten. Je nach verwendetem Akku 
+müssen hier die richtigen Verbindungen hergestellt werden. Die 
+Ladeschlussspannung kann hier auf 4,1 oder 4,2 eingestellt werden und 
+der Ladestrom auf 100mA (ohne Brücke) und 500mA (mit Brücke). Damit PKT 
+auch vom PC über USB mit 500mA geladen werden kann, wird später noch 
+beschrieben wie der FT232 so programmiert wird, das er dem PC-USB 
+mitteilt das USB 500mA benötigt. Das funktioniert aber nur wenn PKT im 
+USB-Modus läuft und nicht im Bluetooth Modus. Default ist die Brücke 
+4,2V für LIPO und 500mA Ladestrom Bitte auch das Datenblatt zum Max1811N
+ beachten wenn es um die Auswahl des 1S-Akkus geht. <span class="anchor" id="line-167"></span><span class="anchor" id="line-168"></span></p></li><li class="gap" style="list-style-type:none"><p class="line862">Ladereglerschaltung,<a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-169"></span><span class="anchor" id="line-170"></span></p></li><li class="gap" style="list-style-type:none">Zum
+ Prüfen USB-Kabel stecken und mit PC verbinden, jetzt sollten am Ausgang
+ des MAX1811 ca. 4,2V zu messen sein. Danach USB-Kabel wieder entfernen.
+ Auszug aus MAX1811 Datenblatt: <span class="anchor" id="line-171"></span><span class="anchor" id="line-172"></span></li><li class="gap" style="list-style-type:none"><p class="line862">Datenblatt, <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-173"></span><span class="anchor" id="line-174"></span></p></li><li class="gap" style="list-style-type:none"><span class="anchor" id="line-175"></span><span class="anchor" id="line-176"></span></li><li class="gap" style="list-style-type:none">Für die Ladekontrolle kann man die SMD LED verwenden oder alternativ eine 3mm LED einlöten. <span class="anchor" id="line-177"></span><span class="anchor" id="line-178"></span></li><li class="gap" style="list-style-type:none"><span class="anchor" id="line-179"></span><span class="anchor" id="line-180"></span></li><li class="gap" style="list-style-type:none"><span class="anchor" id="line-181"></span><span class="anchor" id="line-182"></span></li></ul><p class="line867">
+</p><h4 id="Stromversorgungsteil_.2B-5V_mit_dem_Spannungswandler">Stromversorgungsteil +5V mit dem Spannungswandler</h4>
+<span class="anchor" id="line-183"></span><p class="line867"><strong>Schaltung,</strong> <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-184"></span><span class="anchor" id="line-185"></span></p><p class="line874">Zum
+ Prüfen keinesfalls den Lipo verwenden, sollte irgendwas falsch bestückt
+ sein oder ein Kurzschluss vorhanden sein, dann qualmt es. <span class="anchor" id="line-186"></span><span class="anchor" id="line-187"></span></p><p class="line874">Wieder
+ USB-Kabel stecken, Messgerät an den Ausgang +5V und GND und dann an die
+ Kathode von D6 GND anschliessen, alternativ kann man auch den Taster S1
+ provisorisch mit den beiden Pins die zum Display zeigen auflöten und 
+diesen verwenden, das ist der Einschalttaster. Die Spannung bleibt 
+eingeschaltet. Ausschalten kann man mit GND an Kathode von D8. <span class="anchor" id="line-188"></span><span class="anchor" id="line-189"></span></p><p class="line874">Es
+ kann durchaus sein das nach dem Stecken von USB die Spannung auch ohne 
+GND an D6 eingeschaltet ist. Wichtig ist in dem Moment das 5V an D7/C24 
+zu messen sind <span class="anchor" id="line-190"></span><span class="anchor" id="line-191"></span></p><p class="line874">Wenn 5V zu messen sind ist der Teil fertig. USB-Kabel wieder entfernen <span class="anchor" id="line-192"></span><span class="anchor" id="line-193"></span></p><p class="line867">
+</p><h4 id="Spannungs.2BAPw-berwachung">Spannungsüberwachung</h4>
+<span class="anchor" id="line-194"></span><p class="line874">Für die Spannungüberwachung des PKT-Lipo ist der LT1308 zuständig, daür gibt es die Widerstände <span class="anchor" id="line-195"></span><span class="anchor" id="line-196"></span></p><p class="line874">R48 und R49. Der Widerstand 1,58M ist etwas schwierig zu bekommen, man kann auch alternativ 1,5M einsetzen. <span class="anchor" id="line-197"></span><span class="anchor" id="line-198"></span></p><p class="line874">Mit
+ dem 1,58M Widerstand liegt die Warnschwelle zwischen 3,3-3,4 Volt, mit 
+1,5M bei ca. 3,2Volt, aus Sicherheitsgründen ist der etwas höher 
+gewählt. Auf Grund der Streuung bei den Widerständen wäre ein genauer 
+Abgleich auch nur mit 1% Widerständen möglich. <span class="anchor" id="line-199"></span><span class="anchor" id="line-200"></span></p><p class="line862">Der LT1038 toggelt auch schon vor erreichen der <a class="nonexistent" href="http://wiki.mikrokopter.de/LowBat">LowBat</a>-Endspannung
+ den LBO-Pin so das PKT eine Vorwarnung geben kann, erst wenn LBO 
+dauerhaft geschaltet ist, wird das PKT abgeschaltet. <span class="anchor" id="line-201"></span><span class="anchor" id="line-202"></span></p><p class="line874">3V Stromversorgung mit Spannungsregler <span class="anchor" id="line-203"></span><span class="anchor" id="line-204"></span></p><p class="line862">Schaltung <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-205"></span><span class="anchor" id="line-206"></span></p><p class="line874">Nach dem Bestücken dieses Teils Messgerät an SJ1 Pin 1 anlegen und Spannung (siehe oben) einschalten. <span class="anchor" id="line-207"></span><span class="anchor" id="line-208"></span></p><p class="line874">Alternativ kann man auch an dem Displaypin 34 die 3,3V messen. <span class="anchor" id="line-209"></span><span class="anchor" id="line-210"></span></p><p class="line867">
+</p><h4 id="Restliche_Bauteile">Restliche Bauteile</h4>
+<span class="anchor" id="line-211"></span><p class="line874">Wenn die Spannungen alle in Ordnung sind kann der Rest bis auf das Wi.232 und Bluetoothmodul bestückt werden. <span class="anchor" id="line-212"></span><span class="anchor" id="line-213"></span></p><p class="line874">Die LED Beleuchtung des Displays auf das Display stecken, vorher die Schutzfolien abziehen. <span class="anchor" id="line-214"></span><span class="anchor" id="line-215"></span></p><p class="line874">Die Beleuchtung wird an der Seite mit den jeweils 3 Pins links und rechts mit dem Display verlötet <span class="anchor" id="line-216"></span><span class="anchor" id="line-217"></span></p><p class="line874">Der
+ Atmega1284 ist bereits mit dem Bootlader geflasht, sodas nach dem 
+Bestücken und Spannungeinschalten das PKT mit dem Taster S1 
+einzuschalten ist. Wenn der Bootlader läuft kann das PKT mit der 
+Software aus dem SVN geflasht werden. <span class="anchor" id="line-218"></span><span class="anchor" id="line-219"></span></p><p class="line874">Um
+ den Bootlader zu starten muss beim Einschalten mit der linken Taste 
+zeitgleich die rechte Taste gedrückt werden bis die rote LED(links) 
+leuchtet. Danach hat man ca. 30 Sekunden Zeit das Programm zu laden. 
+Danach schaltet sich der Bootlader ab und startet das Programm. <span class="anchor" id="line-220"></span><span class="anchor" id="line-221"></span></p><p class="line874">Dann
+ muss man wieder von vorne anfangen, entweder aus dem Menü den Bootlader
+ starten oder beim Einschalten die rechte Taste gedrückt halten. <span class="anchor" id="line-222"></span><span class="anchor" id="line-223"></span></p><p class="line867">
+</p><h3 id="Bootlader_flashen">Bootlader flashen</h3>
+<span class="anchor" id="line-224"></span><p class="line874">Ist der 
+Prozessor ohne Bootlader eingelötet worden, ist zum programmieren des 
+Bootlader ein AVR-Programmer notwendig. Um diesen anzuschliessen muss 
+der 6-pol. ISP-Stecker auf der Leiterplatte eingelötet sein. Der 
+Bootlader kann nur über den ISP-Stecker geflasht werden. <span class="anchor" id="line-225"></span><span class="anchor" id="line-226"></span></p><p class="line874">Programmer daran anschliessen und den Bootlader flashen. <span class="anchor" id="line-227"></span><span class="anchor" id="line-228"></span></p><p class="line874">Einstellungen für die Fuse-Bits: <span class="anchor" id="line-229"></span><span class="anchor" id="line-230"></span></p><p class="line874">Low-Fuse : D7 <span class="anchor" id="line-231"></span><span class="anchor" id="line-232"></span></p><p class="line874">High-Fuse : DC <span class="anchor" id="line-233"></span><span class="anchor" id="line-234"></span></p><p class="line874">Ext-Fuse : FC <span class="anchor" id="line-235"></span><span class="anchor" id="line-236"></span></p><p class="line874">Entweder man verwendet das zum jeweiligen Programmer gehörende Programm oder man verwendet AVR-Dude. <span class="anchor" id="line-237"></span><span class="anchor" id="line-238"></span></p><p class="line874">In diesem Fall mit folgenden Parametern AVR-Dude starten: <span class="anchor" id="line-239"></span><span class="anchor" id="line-240"></span></p><p class="line874">Windows <span class="anchor" id="line-241"></span><span class="anchor" id="line-242"></span></p><p class="line862">avrdude
+ -pm1284P -cstk500v2 -PCOM1 -b115200 -V -u 
+-Uflash:w:bootlader_1284P.hex:a -Ulfuse:w:0xd7:m -Uhfuse:w:0xdc:m 
+-Uefuse:w:0xfc:m <span class="anchor" id="line-243"></span><span class="anchor" id="line-244"></span></p><p class="line874">-PCOM1 ist die jeweilige COM Schnittstelle an der der Programmer hängt <span class="anchor" id="line-245"></span><span class="anchor" id="line-246"></span></p><p class="line874">Linux: <span class="anchor" id="line-247"></span><span class="anchor" id="line-248"></span></p><p class="line862">avrdude
+ -pm1284P -cstk500v2 -P/dev/ttyUSB0 -b115200 -V -u 
+-Uflash:w:bootlader_1284P.hex:a -Ulfuse:w:0xd7:m -Uhfuse:w:0xdc:m 
+-Uefuse:w:0xfc:m <span class="anchor" id="line-249"></span><span class="anchor" id="line-250"></span></p><p class="line862">(Achtung! Vorsicht bei Copy&amp;Paste, prüfen!!) <span class="anchor" id="line-251"></span><span class="anchor" id="line-252"></span></p><p class="line874">-P/dev/ttyUSB0 ist die jeweilige COM Schnittstelle an der der Programmer hängt. <span class="anchor" id="line-253"></span><span class="anchor" id="line-254"></span></p><p class="line867">
+</p><h3 id="Software_flashen">Software flashen</h3>
+<span class="anchor" id="line-255"></span><p class="line874">Wenn der Bootlader aktiv ist um das Programm zu flashen, AVR-Dude mit folgenden Parametern aufrufen: <span class="anchor" id="line-256"></span><span class="anchor" id="line-257"></span></p><p class="line862">avrdude -pm1284p -cavr109 -P/dev/ttyUSB0 -b115200 -V -Uflash:w:GPL_PKT_V3_5_2_FC086_HW3_9_atmega1284p.hex:a <span class="anchor" id="line-258"></span><span class="anchor" id="line-259"></span></p><p class="line862">(Achtung! Vorsicht bei Copy&amp;Paste, prüfen!!) <span class="anchor" id="line-260"></span><span class="anchor" id="line-261"></span></p><p class="line874">-P = COM-Schnittstelle wie oben beschrieben. <span class="anchor" id="line-262"></span><span class="anchor" id="line-263"></span></p><p class="line874">Nach dem flashen schaltet sich PKT wieder aus, dann mit der linken Taste einschalten, Taste festhalten bis der Summer piept. <span class="anchor" id="line-264"></span><span class="anchor" id="line-265"></span></p><p class="line867">
+</p><h3 id="PKT_Updatetool">PKT Updatetool</h3>
+<span class="anchor" id="line-266"></span><p class="line874">Um das Update zu vereinfachen gibt es ein Updatetool. <span class="anchor" id="line-267"></span><span class="anchor" id="line-268"></span></p><p class="line874">Updatetool aus dem SVN laden, Avrdude aus dem SVN laden und alles in ein Verzeichnis kopieren. <span class="anchor" id="line-269"></span><span class="anchor" id="line-270"></span></p><p class="line874">Aktuelle
+ aus dem SVN laden und ebenfalls in das Verzeichnis kopieren. Updatetool
+ starten, Einstellungen für die COM-Schnittstelle des PKT machen. 
+Avrdude auswählen, Flashfile auswählen, Haken zum Programmieren und ggf.
+ zum Vergleichen setzen. <span class="anchor" id="line-271"></span><span class="anchor" id="line-272"></span></p><p class="line874">PKT Bootlader starten und auf „Open“ klicken. <span class="anchor" id="line-273"></span><span class="anchor" id="line-274"></span></p><p class="line874">Die Einstellungen der COM-Schnittstelle und Avrdude werden gespeichert und können mit „Delete Settings“ resetet werden. <span class="anchor" id="line-275"></span><span class="anchor" id="line-276"></span></p><p class="line862">Updatetzool Screenshot <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-277"></span><span class="anchor" id="line-278"></span></p><p class="line867">
+</p><h3 id="Module_best.2BAPw-cken">Module bestücken</h3>
+<span class="anchor" id="line-279"></span><p class="line874">Ist bis 
+dahin alles in Ordnung kann jetzt schrittweise das Bluetoothmodul(runde 
+Markierung im Gehäuse beachten und gemäss Zeichnung einlöten) und das 
+Wi.232 eingebaut werden. Unter den Modulen muss eine Isolierung 
+angebracht werden um Kontakt mit der Leiterplatte zu verhindern, 
+Tesafilm oder ein dünner Plastikstreifen, ein wenig Abstand zu 
+Leiterplatte hilft auch beim evtl. Auslöten des Moduls. <span class="anchor" id="line-280"></span><span class="anchor" id="line-281"></span></p><p class="line874">Reihenfolge erst BTM-222, dann Wi232 <span class="anchor" id="line-282"></span><span class="anchor" id="line-283"></span></p><p class="line874">Nach dem Bestücken des BTM-222 PKT einschalten, das Modul wird erkannt und initialisiert. <span class="anchor" id="line-284"></span><span class="anchor" id="line-285"></span></p><p class="line874">Bluetooth Pin und Name kann im Setup geändert werden. <span class="anchor" id="line-286"></span><span class="anchor" id="line-287"></span></p><p class="line874">Die Bluetoothantenne muss als Draht (3,1cm) angelötet werden. <span class="anchor" id="line-288"></span><span class="anchor" id="line-289"></span></p><p class="line874">Dann wird das Wi.232 Modul eingelötet. <span class="anchor" id="line-290"></span><span class="anchor" id="line-291"></span></p><p class="line874">Nach
+ dem Bestücken des Wi232 Moduls, PKT einschalten, das Modul wird 
+automatisch erkannt und mit den Defaultparametern konfiguriert. Diese 
+kann man im Setup-Menü ändern. <span class="anchor" id="line-292"></span><span class="anchor" id="line-293"></span></p><p class="line867">
+</p><h3 id="Bluetooth">Bluetooth</h3>
+<span class="anchor" id="line-294"></span><p class="line867">
+</p><h4 id="Bluetooth_manuell_konfigurieren">Bluetooth manuell konfigurieren</h4>
+<span class="anchor" id="line-295"></span><p class="line867"><strong>Alternative
+ Möglichkeit das Bluetooth BTM-222 zu konfigurieren, das ist in der 
+Regel nicht notwendig da das BTM222 vom PKT konfiguriert wird</strong> <span class="anchor" id="line-296"></span><span class="anchor" id="line-297"></span></p><p class="line867"><strong>Wurde das Modul schonmal mit dem PKT initialisiert, steht es auf 57600, Echo aus und Answer aus.</strong> <span class="anchor" id="line-298"></span><span class="anchor" id="line-299"></span></p><p class="line874">Dazu
+ MK-USB mit einem Adapter bei dem die Pins 1 und 9 gekreuzt sind an PKT 
+anschliessen und im Setup-Menü zu Bluetooth gehen und die 
+PC-Konfiguration auswählen. Serielles Terminalprogramm z.B. 
+Hyperterminal mit 19200Baud auf dem PC starten und gemäss Wiki zum 
+BTM-222 vorgehen. <span class="anchor" id="line-300"></span><span class="anchor" id="line-301"></span></p><p class="line867">
+</p><h3 id="Ben.2BAPY-tigte_AT_Befehle">Benötigte AT Befehle</h3>
+<span class="anchor" id="line-302"></span><p class="line862">Um das <strong>BTM-222</strong> am Kopter zu betreiben, ist es ZWINGEND notwendig, folgende Parameter einzustellen: <span class="anchor" id="line-303"></span><span class="anchor" id="line-304"></span></p><ul><li><p class="line862">A<strong>TR1</strong>   Device ist Slave <span class="anchor" id="line-305"></span><span class="anchor" id="line-306"></span></p></li><li class="gap"><p class="line891"><strong>ATL4</strong> 57600     Baud <span class="anchor" id="line-307"></span></p></li><li><p class="line891"><strong>ATE0</strong> ECHO      deaktivieren (sonst kann die FC resetten) * <span class="anchor" id="line-308"></span></p></li><li><p class="line891"><strong>ATQ1</strong> Rückmeldungen     ausschalten!!!* <span class="anchor" id="line-309"></span></p></li><li><p class="line891"><strong>ATN=Name</strong> Name  des BT-Moduls (optional) <span class="anchor" id="line-310"></span></p></li><li><p class="line891"><strong>ATP=1234</strong> PIN   vergeben (default=1234, optional) <span class="anchor" id="line-311"></span><span class="anchor" id="line-312"></span></p></li></ul><p class="line874">Wenn
+ die Parameter mit * geändert wurden, kommen keine Meldungen mehr im 
+Hyperterminal. Wenn man etwas umstellen will, müssen diese beiden 
+Parameter wieder in den Ausgangszustand gebracht werden! <span class="anchor" id="line-313"></span><span class="anchor" id="line-314"></span></p><p class="line867"><strong>Optimierte Reihenfolge: </strong> <span class="anchor" id="line-315"></span><span class="anchor" id="line-316"></span></p><ul><li><p class="line891"><strong>ATL4</strong> 57600     Baud <span class="anchor" id="line-317"></span><span class="anchor" id="line-318"></span></p></li></ul><p class="line874">jetzt die Baudrate im Terminalprogramm auf 57600 Baud umstellen! <span class="anchor" id="line-319"></span><span class="anchor" id="line-320"></span></p><ul><li><p class="line891"><strong>ATR1</strong> Device    ist Slave <span class="anchor" id="line-321"></span></p></li><li><p class="line891"><strong>ATN=Name</strong> Name  des BT-Moduls (optional) <span class="anchor" id="line-322"></span></p></li><li><p class="line891"><strong>ATP=1234</strong> PIN   vergeben (default=1234, optional) <span class="anchor" id="line-323"></span></p></li><li><p class="line891"><strong>ATQ1</strong> Rückmeldungen     ausschalten!!!* <span class="anchor" id="line-324"></span><span class="anchor" id="line-325"></span></p></li></ul><p class="line874">das war der letzte Befehl, der mit einem OK quittiert wird <span class="anchor" id="line-326"></span><span class="anchor" id="line-327"></span></p><ul><li><p class="line891"><strong>ATE0</strong> ECHO      deaktivieren <span class="anchor" id="line-328"></span><span class="anchor" id="line-329"></span></p></li></ul><p class="line874">auf diesen Befehl kommt kein OK zurück! <span class="anchor" id="line-330"></span><span class="anchor" id="line-331"></span></p><p class="line874">Weiter Infos hier: <span class="anchor" id="line-332"></span><span class="anchor" id="line-333"></span></p><p class="line867"><a class="http" href="http://www.mikrokopter.de/ucwiki/BTM-222?highlight=(btm-222)#BTM-222_Bluetooth_Modul">http://www.mikrokopter.de/ucwiki/BTM-222?highlight=%28btm-222%29#BTM-222_Bluetooth_Modul</a> <span class="anchor" id="line-334"></span><span class="anchor" id="line-335"></span></p><p class="line867">
+</p><h3 id="Bluetooth_im_PC">Bluetooth im PC</h3>
+<span class="anchor" id="line-336"></span><p class="line874">Wenn im PC 
+in der Bluetoothkonfiguration das PKT zwar sichtbar ist, aber keine 
+Dienste angezeigt werden ( No Services found), dann muss man in der 
+Bluetoothkonfiguration des PC unter Lokale Dienste noch ein Serielles 
+Device hinzufügen. Wenn das da ist, verbindet sich Bluetooth mit diesem 
+Seriellen Device und man hat eine COM-Schnittstelle mit der sich das 
+Mikrokoptertool verbinden kann. <span class="anchor" id="line-337"></span><span class="anchor" id="line-338"></span></p><p class="line874">1.Bluetooth Wizard starten <span class="anchor" id="line-339"></span><span class="anchor" id="line-340"></span></p><p class="line862">Screenshot <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-341"></span><span class="anchor" id="line-342"></span></p><p class="line874">2. Bluetoothgeräte suchen <span class="anchor" id="line-343"></span><span class="anchor" id="line-344"></span></p><p class="line862">Screenshot <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-345"></span><span class="anchor" id="line-346"></span></p><p class="line874">Wenn das Gerät PKT GNU-GPL (Im Beispiel pkttest) erscheint weiter klicken <span class="anchor" id="line-347"></span><span class="anchor" id="line-348"></span></p><p class="line862">Screenshot <a href="http://wiki.mikrokopter.de/ToDo">ToDo</a> <span class="anchor" id="line-349"></span><span class="anchor" id="line-350"></span></p><p class="line867"><strong>3.Pinnummer eingeben = 1234</strong> <span class="anchor" id="line-351"></span><span class="anchor" id="line-352"></span></p><p class="line867"><strong>4. Nach dem erfolgreichen Pairing öffnet sich ein Fenster, dort auf Konfigurieren klicken</strong> <span class="anchor" id="line-353"></span><span class="anchor" id="line-354"></span></p><p class="line867"><strong>5. COM-Port wählen oder default übernehmen, fertig mit OK</strong> <span class="anchor" id="line-355"></span><span class="anchor" id="line-356"></span></p><p class="line867"><strong>6.Danach erscheint in den Bluetooth Places das PKT mit dem Stecker als serielles Symbol </strong> <span class="anchor" id="line-357"></span><span class="anchor" id="line-358"></span></p><p class="line867"><strong>7. mit einem Doppelklick auf das Symbol wird die Verbindung zum PKT hergestellt.</strong> <span class="anchor" id="line-359"></span><span class="anchor" id="line-360"></span></p><p class="line874">Klickt man mit der rechten Maustaste auf Eigenschaften sieht man auch den verwendeten COM-Port <span class="anchor" id="line-361"></span><span class="anchor" id="line-362"></span></p><p class="line867"><strong>8.Mikrokoptertool starten und den entsprechenden COM-Port einstellen.</strong> <span class="anchor" id="line-363"></span><span class="anchor" id="line-364"></span></p><p class="line874">Wenn
+ das einmal so konfiguriert ist, braucht man die Bluetoothverbindung 
+nicht mehr manuell starten. In dem Moment wo das Mikrokoptertool beim 
+Starten den gleichen COM-Port verwendet, wird die Verbindung zum PKT 
+automatisch aufgebaut. <span class="anchor" id="line-365"></span><span class="anchor" id="line-366"></span></p><p class="line867">
+</p><h3 id="Funktionen_der_LED.27s">Funktionen der LED's</h3>
+<span class="anchor" id="line-367"></span><p class="line874">Led1: Bootlader aktiv <span class="anchor" id="line-368"></span><span class="anchor" id="line-369"></span></p><p class="line874">Led2: Bluetooth eingeschaltet <span class="anchor" id="line-370"></span><span class="anchor" id="line-371"></span></p><p class="line874">Led3: Bluetooth Data aktiv (blinkt 3 x beim booten von BTM222) <span class="anchor" id="line-372"></span><span class="anchor" id="line-373"></span></p><p class="line874">Led4: Bluetooth Link zum PC aktiv (blinkt 3 x beim booten von BTM222) <span class="anchor" id="line-374"></span><span class="anchor" id="line-375"></span></p><p class="line874">Led5: USB RxD <span class="anchor" id="line-376"></span><span class="anchor" id="line-377"></span></p><p class="line874">Led6: USB TxD <span class="anchor" id="line-378"></span><span class="anchor" id="line-379"></span></p><p class="line874">Led7: Lipo Ladeanzeige <span class="anchor" id="line-380"></span><span class="anchor" id="line-381"></span></p><p class="line874">Led8: alternativ, Lipo Ladeanzeige <span class="anchor" id="line-382"></span><span class="anchor" id="line-383"></span></p><p class="line867">
+</p><h3 id="FT232_USB-Chip_konfigurieren">FT232 USB-Chip konfigurieren</h3>
+<span class="anchor" id="line-384"></span><p class="line874">Zum Schluss
+ muss noch der FT232RL USB-Chip konfiguriert werden. Dies ist 
+erforderlich damit der USB-Chip dem PC mitteilt das er 500mA Strom 
+benötigt. Dann kann man das PKT auch mit dem PC laden. Alternativ ist 
+natürlich auch ein normales USB-Ladegerät möglich. Dieses sollte dann 
+ebenfalls 500mA liefern um die Ladezeit zu verkürzen. <span class="anchor" id="line-385"></span><span class="anchor" id="line-386"></span></p><p class="line874">Um den FT232RL zu programmiern muss man sich von der Website des Herstellers ein Programm herunterladen. <span class="anchor" id="line-387"></span><span class="anchor" id="line-388"></span></p><p class="line862">Link: <a class="http" href="http://www.ftdichip.com/Support/Utilities.htm#FT_Prog">http://www.ftdichip.com/Support/Utilities.htm#FT_Prog</a> <span class="anchor" id="line-389"></span><span class="anchor" id="line-390"></span></p><p class="line874">Hier
+ lädt man sich das Programm FT_Progxxx herunter und installiert es auf 
+dem PC. Bitte Hinweise und Readme's des Herstellers beachten. <span class="anchor" id="line-391"></span><span class="anchor" id="line-392"></span></p><p class="line862">Zum
+ Konfigurieren verbindet man das PKT per USB mit dem PC und schaltet PKT
+ ein. Dann FT_PROG starten und auf die Lupe klicken, dann muss das 
+Device gefunden werden. In den Einstellungen <a class="nonexistent" href="http://wiki.mikrokopter.de/MaxPower">MaxPower</a> muss <strong>Max Bus Power </strong>auf 500mA eingestellt, siehe Screenshot: <span class="anchor" id="line-393"></span><span class="anchor" id="line-394"></span></p><p class="line867">
+</p><h3 id="Tipps_und_Tricks">Tipps und Tricks</h3>
+<span class="anchor" id="line-395"></span><ol type="1"><li><p class="line862">USB<br>
+Den USB    Stecker erst stecken wenn PKT eingeschaltet ist, sonst könnte
+ es        passieren das durch das an/ausschalten mit gestecktem 
+USB-Stecker       der PC die USB Schnittstelle nicht mehr findet. Steckt
+ man den USB      bei eingeschaltetem PKT, erkennt der PC das USB-Gerät 
+und es ist        eine definierte Ausgangslage hergestellt. <span class="anchor" id="line-396"></span><span class="anchor" id="line-397"></span></p></li><li class="gap"><p class="line862">nach dem Bootlader  flashen<br>
+wenn der Bootlader neu geflasht ist, dann startet er nach  dem flashen 
+sofort in einer Schleife und die Displaybeleuchtung geht    an. drückt 
+man jetzt die rechte Taste schaltet sich LED1 ein und er     wartet auf 
+das neue Programm. Kommt nichts über USB, schaltet er        sich PKT 
+nach ca.30Sek. aus und man muss es wieder mit der linken       Taste + 
+rechten Taste einschalten bis LED1(rot) leuchtet, um den        
+Flashvorgang für das Programm starten. <span class="anchor" id="line-398"></span><span class="anchor" id="line-399"></span></p></li><li class="gap">FC Software muss zur        Zeit die 0.86 sein, andere FC Software wird zur Zeit nicht      unterstützt <span class="anchor" id="line-400"></span></li><li>Zum isolieren der   Module eignet sich die abgezogene Displayfolie hervorragend <span class="anchor" id="line-401"></span></li><li>Die
+ Lade-LED kann   auch leuchten wenn kein USB-Kabel gesteckt ist. Das 
+passiert immer      wenn der Akku eine zu niedrige Spannung hat. <span class="anchor" id="line-402"></span></li><li><p class="line862">USB Buchse  einlöten<br>
+Die USB Buchse ist ziemlich ekelig wenn beim Löten ein    Kurzschluss 
+zwischen den Beinchen entsteht, den kriegt man so gut       wie nicht 
+weg, ohne sie wieder komplett auszulöten. Das gilt auch       für ne 
+Pastenschablone.<br>
+Bei mir hat es sich bewährt, die 5         Pin's auf der Leiterplatte zu
+ verzinnen und die Pin's der Buchse mit    Flussmittel zu bestreichen.<br>
+Dann Buchse mit Pinzette einfädeln,    damit auch runterdrücken und mit 
+feiner Lötspitze Pin für Pin   verlöten, ohne Zugabe von weiterem 
+Lötzinn. Danach dann die vier        Ecken verlöten.<br>
+Alternative(<a class="http" href="http://forum.mikrokopter.de/profile-7217.html">quadflyer8</a>):falls    es aber doch mal eng wird, und mehrere Pins ne Lötbrücke haben  sollten, ist Entlötsauglitze das Mittel der Wahl.<br>
+Die Litze        etwas zusammenschieben, damit sie aufgefächert und 
+breiter wird,        dann die Litze über die abzusaugende Stelle und mit
+ dem Lötkolben       auf die Litze draufhalten. Das saugt zuverlässig 
+ab, speziell auch      beim FT232... <span class="anchor" id="line-403"></span></p></li><li><p class="line862">Akku<br>
+Akkus vom         IPod, (Reichelt)AKKU IPHONE 3G :: 1600mAh, Li-Pol, für
+ iPhone   3.Generation passen ins Gehäuse, da         kann man sich im 
+Prinzip aussuchen was einem gefällt. Bitte auch im     Forumthread 
+einfach mal nachschauen oder fragen, da gibt’s immer        Tipps zu 
+solchen Themen <span class="anchor" id="line-404"></span><span class="anchor" id="line-405"></span></p></li></ol><p class="line867">
+</p><h3 id="Fehler_und_Ursachen">Fehler und Ursachen</h3>
+<span class="anchor" id="line-406"></span><ol type="1"><li>Flashen über USB    geht nicht. Grund: D3 ist bestückt, auslöten!! <span class="anchor" id="line-407"></span></li><li><p class="line862">Flashen
+ über USB    geht nicht. Grund: Fusebits nicht programmiert oder falsch.
+ Bei         copy&amp;paste aus der PDF darauf achten das alles was 
+kopiert wurde        auch in der Komandozeile steht, wegen dem 
+Zeilenumbruch kann das        schiefgehen. <span class="anchor" id="line-408"></span></p></li><li>Flashen über USB    geht nicht. Grund: Quarz nicht richtig verlötet, nachlöten. <span class="anchor" id="line-409"></span></li><li>Flashen über USB    geht nicht. Grund: Lötbrücke zwischen Durchkontaktierung und    Atmega-Pin <span class="anchor" id="line-410"></span><ol type="1"><li>BTM222-Led2 blinkt                 nicht. Grund: Lötbrücke zwischen BTM222 Pin und                 Durchkontaktierung. <span class="anchor" id="line-411"></span><span class="anchor" id="line-412"></span></li></ol></li></ol><p class="line874">6. PKT lässt sich nur mit gestecktem USB-Kabel einschalten <span class="anchor" id="line-413"></span><span class="anchor" id="line-414"></span></p><p class="line874">Anschluss
+ am Akku prüfen, die Akkus haben meistens 3 Kabel, wovon eins als 
+Messanschluss dient. Dieser Anschluss darf nicht verwendet werden <span class="anchor" id="line-415"></span><span class="anchor" id="line-416"></span></p><p class="line867">
+</p><h3 id="A.2BAMQ-nderungen">Änderungen</h3>
+<span class="anchor" id="line-417"></span><p class="line867">
+</p><h4 id="Patch_1:_Lipo_Spannungs.2BAPw-berwachung">Patch 1: Lipo Spannungsüberwachung</h4>
+<span class="anchor" id="line-418"></span><p class="line867"><strong>!!! Achtung !!! nur für Leiterplatte 3.9m</strong> <span class="anchor" id="line-419"></span><span class="anchor" id="line-420"></span></p><p class="line874">Auf Leiterplatte 3.9x ist die Änderung schon im Layout eingebaut. <span class="anchor" id="line-421"></span><span class="anchor" id="line-422"></span></p><p class="line874">Für die Lipospannungsüberwachung muss eine zusätzliche Drahtbrücke eingelötet werden. <span class="anchor" id="line-423"></span><span class="anchor" id="line-424"></span></p><p class="line874">Die
+ Drahtbrücke führt von R48/R49 zum Pin 36 des Atmega1284. Man kann den 
+Draht direkt an den Pin löten oder wie auf dem Bild zu sehen an die 
+Durchkontaktierung der Leiterbahn die zu Pin 36 führt. Pin3 von JP1 ist 
+ebenfalls möglich, allerdings sollte der Draht so kurz wie möglich sein.
+ <span class="anchor" id="line-425"></span><span class="anchor" id="line-426"></span></p><p class="line867"><a class="http" href="http://gallery3.mikrokopter.de/var/albums/uploads/Aenderung_LipoMessung.jpg?m=1416859381"><img alt="http://gallery3.mikrokopter.de/var/albums/uploads/Aenderung_LipoMessung.jpg?m=1416859381" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/Aenderung_LipoMessung.jpg" title="http://gallery3.mikrokopter.de/var/albums/uploads/Aenderung_LipoMessung.jpg?m=1416859381"></a> <span class="anchor" id="line-427"></span><span class="anchor" id="line-428"></span></p><p class="line874">Die
+ Spannungsüberwachung wird ab Software 3.5.7 unterstützt, ältere 
+Software läuft ebenfalls noch, nur die Anzeige der Lipospannung 
+funktioniert natürlich nicht. <span class="anchor" id="line-429"></span><span class="anchor" id="line-430"></span></p><p class="line867">
+</p><h4 id="Patch_2:_SV2_Patch">Patch 2: SV2 Patch</h4>
+<span class="anchor" id="line-431"></span><p class="line874">Diese 
+Änderung ermöglicht es am Stecker SV2 des PKT andere serielle Geräte 
+anzuschließen, z.B. WLAN Module oder andere Bluetooth-Module. Die Module
+ können ggf. duche die Software des PKT auch unterstützt werden. 
+Beispiele siehe weiter unten. <span class="anchor" id="line-432"></span><span class="anchor" id="line-433"></span></p><p class="line874">Damit
+ ist es möglich die Datenverbindung zum MK aus dem PKT herauszuführen 
+für den Fall das das interne Bluetooth-Modul oder der USB-Aschluss nicht
+ ausreichen. <span class="anchor" id="line-434"></span><span class="anchor" id="line-435"></span></p><p class="line862">Den neuen Bootlader benötigt man nur wenn man PKT Updates mit gestecktem <a class="nonexistent" href="http://wiki.mikrokopter.de/WiFly">WiFly</a> Modul machen möchte, ansonsten mus beim Update einfach nur das <a class="nonexistent" href="http://wiki.mikrokopter.de/WiFly">WiFly</a> Modul an SV2 abgezogen werden. <span class="anchor" id="line-436"></span><span class="anchor" id="line-437"></span></p><p class="line867"><strong>Der Bootlader V2 darf nicht über USB geflasht werden!!, wie man den neuen Bootlader flasht ist hier beschrieben: <a class="http" href="http://www.mikrokopter.de/ucwiki/Portables%20Mikrokoptertool#Bootlader_flashen">http://www.mikrokopter.de/ucwiki/Portables%20Mikrokoptertool#Bootlader_flashen</a></strong> <span class="anchor" id="line-438"></span><span class="anchor" id="line-439"></span></p><p class="line874">Einbauanleitung in der nachfolgenden PDF. <span class="anchor" id="line-440"></span><span class="anchor" id="line-441"></span></p><p class="line867"><a class="http" href="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_SV2_Patch.pdf.html"><img alt="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_SV2_Patch.pdf.html" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main_002.jpeg" title="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_SV2_Patch.pdf.html"></a> <span class="anchor" id="line-442"></span><span class="anchor" id="line-443"></span></p><p class="line867">
+</p><h4 id="Patch_3:_WiFly_Patch">Patch 3: WiFly Patch</h4>
+<span class="anchor" id="line-444"></span><p class="line874">Wofür wird das benötigt? <span class="anchor" id="line-445"></span><span class="anchor" id="line-446"></span></p><p class="line874">Der
+ Patch bietet die Möglichkeit ein Wlan Modul an SV2 des PKT 
+anzuschliessen, damit können iPhone/iPads mit der MK-Tool/iKopter 
+Software eine Verbindung zum MK aufbauen. <span class="anchor" id="line-447"></span><span class="anchor" id="line-448"></span></p><p class="line874">Weitere Infos zu dem Modul und Anschluss ans PKT: <span class="anchor" id="line-449"></span><span class="anchor" id="line-450"></span></p><p class="line867"><a class="http" href="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_WiFly.pdf.html"><img alt="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_WiFly.pdf.html" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main.jpeg" title="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_WiFly.pdf.html"></a> <span class="anchor" id="line-451"></span><span class="anchor" id="line-452"></span></p><p class="line862">Die Unterstützung der <a class="nonexistent" href="http://wiki.mikrokopter.de/WiFly">WiFly</a> Module wird im PKT ständig erweitert und das ist noch nicht abgeschlossen. <span class="anchor" id="line-453"></span><span class="anchor" id="line-454"></span></p><p class="line874">Zur
+ Zeit ist der Adhoc Modus und AP Modus mit bestimmten Softwareversionen 
+im Setup einstellbar. Das Setup des Moduls übernimmt PKT, sodaß man im 
+Idealfall ein neues Modul direkt anschliessen und durch PKT 
+konfigurieren kann. Hier wird noch dran gearbeitet und es kann nicht 
+sichergestellt werden das es keine Fehler merh gibt. Falls ja bitte Info
+ im bekannten Thread oder direkt an das PKT-Team. <span class="anchor" id="line-455"></span><span class="anchor" id="line-456"></span></p><p class="line874">Wer
+ das Modul "zu Fuß" programmieren möchte kann das ebenfalls tun, es gibt
+ diverse Anleitungen dafür, s.u. oder siehe auch auf den Seiten von 
+Panocanaris fc00.de. <span class="anchor" id="line-457"></span><span class="anchor" id="line-458"></span></p><p class="line874">Damit das RN-171 Modul auch im Ad-Hoc Modus funktioniert sollte die letzte dafür vorgesehene Version 2.38.3 installiert sein. <span class="anchor" id="line-459"></span><span class="anchor" id="line-460"></span></p><p class="line874">Step 1: installierte Version überprüfen <span class="anchor" id="line-461"></span><span class="anchor" id="line-462"></span></p><ol type="1"><li>$$$ <span class="anchor" id="line-463"></span></li><li>ver <span class="anchor" id="line-464"></span></li><li>reboot <span class="anchor" id="line-465"></span><span class="anchor" id="line-466"></span></li></ol><p class="line874">Step 2: mit Wlan Netzwerk verbinden <span class="anchor" id="line-467"></span><span class="anchor" id="line-468"></span></p><ol type="2"><li>$$$ <span class="anchor" id="line-469"></span></li><li><p class="line862">set wlan ssid xyz -&gt; für xyz den Netzwerknamen eingeben, Leerzeichen ersetzen durch $ <span class="anchor" id="line-470"></span></p></li><li><p class="line862">set wlan phrase xyz -&gt; für xyz den Netzwerkschlüssel eingeben <span class="anchor" id="line-471"></span></p></li><li>set ip dhcp 1 <span class="anchor" id="line-472"></span></li><li>set wlan join 1 <span class="anchor" id="line-473"></span></li><li>save <span class="anchor" id="line-474"></span></li><li>reboot <span class="anchor" id="line-475"></span><span class="anchor" id="line-476"></span></li></ol><p class="line874">Step 3: eigentliches Update durchführen <span class="anchor" id="line-477"></span><span class="anchor" id="line-478"></span></p><ol type="3"><li>$$$ <span class="anchor" id="line-479"></span></li><li>set ftp address 198.175.253.161 <span class="anchor" id="line-480"></span></li><li>set ftp dir public <span class="anchor" id="line-481"></span></li><li>set ftp user roving <span class="anchor" id="line-482"></span></li><li>set ftp pass Pass123 <span class="anchor" id="line-483"></span></li><li>set ftp filename wifly7-2383.img <span class="anchor" id="line-484"></span></li><li>set ftp dns backup rn.microchip.com <span class="anchor" id="line-485"></span></li><li>set ftp timeout 200 <span class="anchor" id="line-486"></span></li><li>save <span class="anchor" id="line-487"></span></li><li>ftp update <span class="anchor" id="line-488"></span></li><li>save <span class="anchor" id="line-489"></span></li><li>factory RESET <span class="anchor" id="line-490"></span></li><li>reboot <span class="anchor" id="line-491"></span><span class="anchor" id="line-492"></span></li></ol><p class="line874">Alle
+ Eingaben kann man zwischendurch auch mit z.B. get ftp überprüfen. Dies 
+ist besonders bei Step 3 nach dem ersten Save gut, denn da kann es 
+vorkommen z.B. bei set ftp dir public das public nicht übernommen wurde.
+ <span class="anchor" id="line-493"></span><span class="anchor" id="line-494"></span></p><p class="line867">
+</p><h4 id="Patch4:_BLE_Bluetooth_4.0">Patch4: BLE Bluetooth 4.0</h4>
+<span class="anchor" id="line-495"></span><p class="line874">Das BLE 
+Mini ist ein Bluetooth 4.0 Modul was auch in Verbindung mit dem iPhone 
+serielle Verbindungen unterstützt um z.B. die App iKopter ohne Jailbreak
+ anzubinden. <span class="anchor" id="line-496"></span><span class="anchor" id="line-497"></span></p><p class="line874">Das
+ Modul wird nach jetzigem Stand mit den richtigen Einstellungen fürs PKT
+ ausgeliefert, so daß keine speziellen Konfigurationen des Moduls 
+notwendig sind. <span class="anchor" id="line-498"></span><span class="anchor" id="line-499"></span></p><p class="line874">Weitere Infos zu dem Modul und Anschluss ans PKT: <span class="anchor" id="line-500"></span><span class="anchor" id="line-501"></span></p><p class="line867"><a class="http" href="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_BLE_001.pdf.html"><img alt="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_BLE_001.pdf.html" class="external_image" src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/main_004.jpeg" title="http://gallery.mikrokopter.de/main.php/v/uploads/PKT_39x_BLE_001.pdf.html"></a> <span class="anchor" id="line-502"></span><span class="anchor" id="line-503"></span></p><p class="line867"><br>
+ <span class="anchor" id="line-504"></span><span class="anchor" id="line-505"></span></p><ul><li style="list-style-type:none"><span class="anchor" id="line-506"></span></li><li style="list-style-type:none"><p class="line891"><a href="http://wiki.mikrokopter.de/KategorieProjekte">KategorieProjekte</a> <a href="http://wiki.mikrokopter.de/KategorieTools">KategorieTools</a> <span class="anchor" id="line-507"></span></p></li></ul><span class="anchor" id="bottom"></span></div></div></div></div>
+<!-- Cookie --><script src="Portables%20Mikrokoptertool%20-%20MikrokopterWiki-Dateien/cookiechoices.js"></script> <script> document.addEventListener('DOMContentLoaded', function(event) { cookieChoices.showCookieConsentBar('Für die Funktion und Optimierung unserer Webseiten, d.h. MikroKopter.de und deren Subdomains (z.B. forum.mikrokopter.de, wiki.mikrokopter.de usw) benutzen wir Cookies. Wenn Sie diese Webseiten weiter nutzen, ohne ihre Cookie-Einstellungen zu ändern, gehen wir davon aus, dass Sie mit der Speicherung aller Cookies auf unseren Webseiten einverstanden sind. Die Cookie-Nutzung unseres Webanalyse-Tool (Piwik) können Sie in unserer Datenschutzerklärung gesondert widersprechen.', 'For the function and optimization of our websites: MikroKopter.de and their subdomains (forum.mikrokopter.de, wiki.mikrokopter.de etc.) we use Cookies. If you continue to use these sites without changing your cookie settings, we assume that you agree with the storage of all cookies from our websites. The Cookie usage of our web analytics tool (Piwik) you can reject separately in our Privacy Policy.','OK', 'Datenschutzerklärung / Privacy Police' , 'http://wiki.mikrokopter.de/Datenschutz'); });</script>
+<!-- Piwik --><script type="text/javascript">  var _paq = _paq || [];  _paq.push(['trackPageView']);  _paq.push(['enableLinkTracking']);
+               (function() {     var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stat.mikrokopter.de/piwik/";
+               _paq.push(['setTrackerUrl', u+'piwik.php']);     _paq.push(['setSiteId', 1]); 
+               var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+               g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);   })(); </script>
+               <noscript><img src="http://stat.mikrokopter.de/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></noscript>
+                 <!-- End Piwik Code -->
+
+
+<div id="cookieChoiceInfo" style="position: fixed; width: 99%; background-color: rgb(255, 250, 190); border-bottom: 1px solid black; margin: 0px; left: 0px; top: 0px; padding: 5px 5px 15px; z-index: 99999; text-align: center; height: 350px; font-size: 20pt;"><p style="padding-bottom: 15px; font-weight: bold;">Information: Cookies</p><p style="padding-bottom: 15px; padding-right: 15px; width: 99%; margin: 0px auto;">Für
+ die Funktion und Optimierung unserer Webseiten, d.h. MikroKopter.de und
+ deren Subdomains (z.B. forum.mikrokopter.de, wiki.mikrokopter.de usw) 
+benutzen wir Cookies. Wenn Sie diese Webseiten weiter nutzen, ohne ihre 
+Cookie-Einstellungen zu ändern, gehen wir davon aus, dass Sie mit der 
+Speicherung aller Cookies auf unseren Webseiten einverstanden sind. Die 
+Cookie-Nutzung unseres Webanalyse-Tool (Piwik) können Sie in unserer 
+Datenschutzerklärung gesondert widersprechen.</p><a href="http://wiki.mikrokopter.de/Datenschutz" target="_blank" style="margin-left: 8px; padding: 6px; color: black;">Datenschutzerklärung / Privacy Police</a><a id="cookieChoiceDismiss" href="#" style="margin-left: 24px; background-color: rgb(86, 92, 241); padding: 6px; color: white;">OK</a></div></body></html>

@@ -1,0 +1,896 @@
+/*  sections.css - sections styles
+
+Usage: copy and paste into your theme screen.css, change colors and
+spacing as needed.
+
+Copyright (c) 2005 by Nir Soffer
+*/
+
+/* Content Sidebar */
+#content 
+{ 
+	padding: 1px 0px 0 10px;
+	min-height: 600px;
+    border-left: 1px solid rgb(230,230,230);
+    clear: right;
+
+}
+
+.feature-icon {
+-webkit-box-shadow: 3px 3px 9px #949494;
+box-shadow: 3px 3px 9px #949494;
+-moz-box-shadow: 3px 3px 9px #949494;
+border: 2px solid rgb(2, 2, 2) !important;
+border-radius: 5px;
+padding: 5px;
+
+}
+
+#content .sidebar {float: right; width: 150px; margin: 0 0 20px 20px;
+    padding: 0; font-size: 0.85em;}
+#content[dir="rtl"] .sidebar {float: left; margin: 0 20px 20px 0;}
+#content .sidebar p {text-align: left;}
+#content[dir="rtl"] .sidebar p {text-align: right;}
+/* All headings use darker blue and some white space above */
+#content .sidebar h3, #content .sidebar h4 {margin: 1.5em 0 0 0; 
+    padding: 2px 8px; background: #B8C5D9;}
+#content .sidebar *:first-child {margin-top: 0}
+/* all block elements use light blue background */
+#content .sidebar ul, #content .sidebar ol, #content .sidebar p, #content .sidebar table, #content .sidebar div {
+    background: #F2F4F7;}
+#content .sidebar ul, #content .sidebar ol {margin: 0; padding: 0;}
+/* Paragraphs and list items separated with bottom border */
+#content .sidebar p, #content .sidebar li {margin: 0; padding: 4px 8px;
+    border-bottom: 1pt solid #E6EAF0; }
+#content .sidebar li { display: block;}
+#content .sidebar li p {margin: 0; padding: 0; border: none;}
+
+/* Content Figures 
+
+Default figure float to the end of the page. Left of right classes float to the left or right :-)
+*/
+#content .figure {float: right; margin: 0 0 0 20px; padding: 0; 
+    font-size: 0.85em;}
+#content[dir="rtl"] .figure {float: left; margin: 0 20px 0 0;}
+#content .figure.left {float: left; margin: 0 20px 0 0;}
+#content .figure.right {float: right; margin: 0 0 0 20px;}
+#content .figure p {margin: 0; text-align: center; font-weight: bold; }
+
+/* screen.css of MoinMoin theme "sinorca4moin" by David Linke.
+    $Id: screen.css 126 2006-12-17 16:08:21Z linke $
+*/
+
+#fullcontent
+{
+min-height: 600px;
+background: rgb(245,245,245);
+background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(245,245,245,1)), color-stop(100%,rgba(255,255,255,1)));
+background: -webkit-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(255,255,255,1) 100%);
+background: linear-gradient(top, rgba(245,245,245,1) 0%,rgba(255,255,255,1) 100%);
+background: -webkit-box-shadow: 0px 0px 22px #b8b9b6;
+-moz-box-shadow: 0px 0px 22px #b8b9b6;
+box-shadow: 0px 0px 22px #b8b9b6;
+}
+
+
+    #mypage 
+    {
+    width: 980px;
+    margin: 0 auto;
+   }
+
+/* ##### Common Styles ##### */
+
+body {
+  color: black;
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  /*line-height: 1.0em;*/
+  /*background-color: #f3f3f3;*/
+  background-image: url("../img/verlauf.jpg");
+  background-repeat: repeat-x;
+  
+}
+
+.toppanel
+{
+font-size: 13px;
+height: 10px;
+clear: right;
+
+}
+.toppanel li {
+padding: 12px 0 0 0;
+float: right;
+display: block;
+margin: 0 1px 0 0;
+
+}
+
+.toppanel li a
+{
+  padding: 7px 10px 9px 5px;
+  font-family: Helvetica;
+  display: block;
+  background-color: #5E6F80;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+.toppanel li a:hover {  background-color: #50575E; }
+
+
+.external_image
+{
+	box-shadow: 1px 1px 7px #aaa;
+	margin-left: 2px;
+	margin-right: 2px;
+   max-width: 180px;
+  }
+
+img[src^="http://gallery3."] 
+{   
+   max-width: 780px !important;
+}
+    
+.mklogo
+{
+  z-index: 10;
+  top: -47px;
+  left: -10px;
+  position: relative;
+  width: 200px;
+}
+
+.table-of-contents
+{
+  /*border: 1px solid #999999;*/
+  margin-bottom: 5px;
+  padding: 10px;
+  margin-top: 2px;
+  margin-left: 2px;
+  display: inline-block;  
+  background-color: #f9f9f9;
+  border: 1px solid #aaa;
+  box-shadow:5px 5px 15px #aaa;
+  padding-right: 20px;
+  font-size: 0.9em;
+  
+  
+   
+}
+
+.table-of-contents-heading 
+{
+  color: #000000;
+  font-weight: bold;
+}
+.table-of-contents-end
+{
+    margin-top: 0px;
+	padding-top: 0px;
+    background: #fff url("../img/bg/sidebar_end_rev.png") no-repeat scroll left top;
+    height: 30px;
+	margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-left: 2px;
+    padding-left: 2px;
+
+  
+}
+
+a {text-decoration: none;
+}
+
+
+/* ##### Header ##### */
+.superHeader {
+  color: rgb(116, 116, 116);
+  /*background-color: rgb(100,135,220);*/
+  height: 10px;
+  font-size: 0.8em;
+  padding-top: 5px;
+}
+
+.superHeader a {
+  color: rgb(116, 116, 116);
+  text-decoration: none;
+}
+
+.superHeader a:hover {
+  text-decoration: underline;
+}
+
+.superHeader ul {
+  display: inline;
+}
+
+.superHeader li {
+  display: inline;
+  padding: 0;
+  margin: -10px;
+}
+
+.superHeader .left {
+
+text-align: left;
+  float: left;
+  margin: 0.5ex 0px 0.5ex;
+  padding: 0 0 0 10px;
+  display: inline; /* forces IE to calc correct margin */
+}
+
+.superHeader .right {
+  text-align: right;
+  float: right;
+  margin: 0.5ex 10px 0.5ex 0px;
+  padding 0;
+  display: inline; /* forces IE to calc correct margin */
+}
+
+.midHeader, .midHeader2 {
+  color: rgb(39,78,144);
+  /*background-color: rgb(140,170,230);*/
+  margin: 0;
+  font-size: 2.4em;
+  font-weight: normal;
+  line-height: 1.4em;
+  height: 35px;
+}
+
+.midHeader a, .midHeader2 {
+  text-decoration: none;    
+  color: rgb(39,78,144);
+  margin: 5px 0px 5px 10px;
+}
+.midHeader2 { height: initial; }
+
+
+
+#logo {
+  /* contains image and/or text link */
+  display: inline;
+}
+
+#logo img {
+  /* logo image */
+  vertical-align: bottom;
+  margin: 5px 0px 5px 0px;
+}
+
+#username {
+  white-space: nowrap;
+}
+
+#username ul {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+#username li {
+  padding: 0.1ex 15px;
+}
+
+.subHeader {
+  color: white;
+  background-color: rgb(0,51,153);
+  font-size: 0.9em;
+  margin: 0;
+  padding: 1ex 1ex 1ex 1.5mm;
+}
+
+.subHeader a {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 0 0.75ex 0 0.5ex;
+}  
+
+.subHeader a:hover {
+  text-decoration: underline;
+}
+
+.superHeader .highlight, .subHeader .highlight {
+  color: rgb(253,160,91);
+}
+
+
+/* ##### Side Bar ##### */
+
+#sidebar {
+/*  margin: 5px, 0px;*/
+  float: left;
+/*  background-color: green; for debugging IE surprises*/
+ 
+  width: 162px;
+  padding: 0;	
+  overflow: hidden;
+  display: inline; /* forces IE to calc correct margin */
+  
+  
+}
+
+#sidebar a {
+  color: #5E6F80;
+  background-color: transparent;
+ 
+  text-decoration: none;
+  margin: 0;
+  /*padding: 0.25em 0;*/
+  line-height: 1.5em;
+  display: block;
+}
+
+
+#sidebar .current {
+/*  color: black;
+  background-color: white;*/
+/*  border: 1px solid rgb(253,160,91);*/
+}
+
+#sidebar a:hover {
+  color: white;
+  background-color: #5E6F80;
+  text-decoration: none;
+}
+
+.sidepanel {
+ margin: 3px;
+ margin-top: 20px;
+ margin-bottom: 35px;
+padding-top: 5px;
+float: left;
+width: 150px;
+overflow: hidden;
+display: inline;
+}
+
+
+ 
+ .sidepanel strong { 
+   padding-top: 5px;
+ 
+ }
+
+.sidepanel-wiki, .sidepanel-page {
+  margin: 3px;
+  float: left;
+  width: 150px;	
+  padding-top: 0px;
+ border: 1px solid #5E6F80;
+
+  /*background-color: white; */
+  overflow: hidden; /* new 18:11 */
+  display: inline; /* forces IE to calc correct margin */
+
+}
+
+.sidepanel-wiki h1, .sidepanel-page  h1 { font-weight: bold; background-color: rgb(186, 215, 247);}
+
+#sidebar-end {
+    margin-top: 0px;
+    background: transparent url("../img/bg/sidebar_end.png") no-repeat scroll right top;
+    height: 90px;
+}
+.sidepanel_google {
+  margin: 5px;
+  float: left;
+  width: 150px;	
+  border: none;
+  background: #ffffff;
+  overflow: hidden; /* new 18:11 */
+  display: inline; /* forces IE to calc correct margin */
+}
+.sidepanel h1, .sidepanel-wiki h1, .sidepanel-page  h1 {
+  margin: 0;
+  border: none;
+  font-size: 1em;
+  background: #5E6F80;
+  padding: 2px 5px 2px 5px;
+  color: white;
+  font-weight: normal;
+}
+
+.sidepanel h2, .sidepanel-wiki h2, .sidepanel-page  h2 {
+  margin: 0;
+  padding: 0.2em 10px;
+  border: none;
+  font-size: 1em;
+  color: white;
+  background-color: rgb(0,51,153);
+}
+	    
+
+.sidepanel li , .sidepanel-wiki li , .sidepanel-page  li {
+  margin: 0;
+  padding: 1px 5px;
+}
+
+.sidepanel  p {
+  padding: 0px;
+}
+  
+.sidepanel  hr {
+  margin: 5px;
+  border:solid rgb(100,135,220) 1px; height:1px;
+}
+
+.sidepanel ul, .sidepanel-wiki ul, .sidepanel-page  ul {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+.actionsmenu select{
+  width: 140px;
+}
+
+
+/* ===== Iconbar ===== */
+#iconbar {
+  float: right;
+margin: 3px 0 0 0;
+position: relative;
+top: -20px;
+height: 20px;
+clear: right;
+}
+
+*[dir="rtl"] #iconbar {
+  float: right;
+  margin: 5px 10px 5px 0;
+}
+
+#iconbar li {
+  display: inline;
+}
+
+#iconbar img {
+  padding: 1px;
+}
+
+
+/* title of the current wiki-page */
+#pagelocation {
+  padding: 15px 0;
+  
+  color: rgb(100,135,220);
+}
+
+
+/* ##### Main Copy ##### */
+
+#page {
+  color: rgb(75, 75, 75);
+  
+/*  background-color: yellow; for debugging IE surprises*/
+/*  text-align: justify;*/
+  line-height: 1.5em;
+  margin: 0 5px 0px 160px;
+  padding: 0px 0px 10px 0px;
+ 
+}
+
+#page p {
+ margin: 0.5em 0 0.25em 0;
+  padding: 0 0 0 0;
+}
+
+/* Use same margin for normal list item as for li p (see common.css) */
+#page li {
+  padding: 0;
+  margin: 0.25em 0;
+}
+
+#page a {
+  color: rgb(0,102,204);
+  background-color: transparent;
+}
+
+#page a.nonexistent, a.badinterwiki {
+  color: #900000;
+  border-bottom: dotted 1px;
+}
+
+#page a:hover {
+  text-decoration: underline;
+}
+
+dl {
+  margin: 1em 1ex 2em 1ex;
+  padding: 0;
+}
+
+dt {
+  font-weight: bold;
+  margin: 0 0 0 0;
+  padding: 0;   
+  
+}
+
+dd {
+  margin: 0 0 0.5em 1em;
+  padding: 0;
+
+}
+
+.searchresults dd
+{
+  display: none;
+  
+}  
+pre {
+  background-color: #FFF8ED;
+}
+
+/* ##### Footer ##### */
+
+#footer {
+  color: white;
+  /*background-color: rgb(100,135,220);*/
+  font-size: 0.9em;
+  margin: 0;
+  padding-top: 5px;
+  
+  clear: both;
+}
+
+#footer a {
+  color: color: rgb(0,102,204);
+ 
+  text-decoration: underline ;
+}
+
+#footer a:hover {
+  text-decoration: none;
+}
+
+
+/* DL addition from rightsidebar/classic/modern screen.css*/
+
+#pagetrail {
+  /*clear: left;*/
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  height: 2em;
+  padding-left: 0px;
+ /* border-bottom: 1px solid rgb(153,153,153);*/
+}
+
+*[dir="rtl"] #pagetrail {
+  /*clear: right;*/
+}
+
+/* for broken IE */ 
+* html #pagetrail li {
+  border-right: 1px solid #AAA;
+  padding: 0 0.3em 0 0;
+}
+
+#pagetrail li  {
+  float: left;
+  display: block;
+  margin: 2px 0 3px 5px;
+  padding: 0 2px;
+}
+
+*[dir="rtl"] #pagetrail li {
+  float: right;
+}
+
+#pagetrail a {
+  text-decoration: none;
+  color: rgb(0,102,204);
+}
+
+/* XXX Warning: non-ascii characters! */
+#pagetrail li:after {
+  content: " »";
+}
+#pagetrail li:last-child:after {
+  content: "";
+}
+
+#searchform {
+margin: 2px;
+padding-top: 20px;
+}
+
+*[dir="rtl"] #searchform {
+  float: left;
+}
+
+#searchform form div {
+  display: inline;
+}
+
+#searchform  input[type="submit"]
+{
+background-color: #5485cf;
+color: white;
+border: 1px solid rgb(46, 72, 112);
+}
+
+#searchform  input[type="text"]
+{
+margin-left: 5px;
+margin-bottom: 3px;
+
+}
+
+#searchform  #fullsearch
+{
+  margin-left: 5px;
+}
+
+ #searchform  input[type="submit"]:hover
+ {
+    background-color: rgb(37, 93, 177);
+}
+
+
+.searchhitinfobar
+{
+  color: rgb(163, 163, 163);
+  
+}
+
+.editbar form, .editbar form div {
+    display: inline;
+    text-align: center;
+}
+
+#message {
+margin: 0 auto;
+padding: 0.5ex;
+padding-left: 7px;
+background-color: rgb(253, 253, 221);
+border: 1px solid rgb(199, 199, 199);
+line-height: 1.2em;
+font-size: 0.4em;
+/* width: 75%; */
+position: absolute;
+top: 0px;
+z-index: 99999;
+width: 968px;
+}
+
+#message p{
+  margin: 0;
+}
+
+#message a{
+  margin: 0;
+  color: rgb(0,102,204); 
+}
+
+/* We use here dumb css1 ids because of IE suckiness */
+#editor-comment {width: 70%;  background-color: yellow;}
+#editor-textarea { /*width: 100%;*/}
+
+#pagebottom {
+/*  clear: both;*/
+}
+
+#preview {
+  border-top: 2px solid black;
+  margin-top: 10px;
+  padding: 0;
+  background: url(../img/draft.png);
+}
+.comment {  
+ background-color: #F78181;
+ font-weight: bold;
+ color: black;
+ padding: 3px;
+}
+
+
+.diff {
+  width:99%;
+}
+
+.diff-title {
+  background-color: #C0C0C0;
+}
+
+.diff-added {
+  background-color: #E0FFE0;
+  vertical-align: sub;
+}
+
+.diff-removed {
+  background-color: #FFFFE0;
+  vertical-align: sub;
+}
+
+.diff-added span {
+  background-color: #80FF80;
+}
+
+.diff-removed span {
+  background-color: #FFFF80;
+}
+
+.searchresult dd span {
+  font-weight: bold;
+}
+
+#version{
+  margin: 5px 5px;
+  padding: 0px;
+  text-align: center;
+  font-size: 1em; 
+  color: #6C7680;
+}
+
+#credits{
+  margin: 5px 5px;
+  padding: 0px;
+  text-align: center;
+  font-size: 1em; 
+}
+
+#timings{
+  margin: 5px 0px;
+  padding: 0;
+  text-align: center;
+  font-size: 0.8em; 
+  color: #6C7680;
+}
+#credits li {
+  display: inline;
+  padding: 0 10px;
+}
+
+#timings li {
+  display: inline;
+  padding: 0 5px;
+}
+
+#credits img {
+  vertical-align: middle;
+}
+
+/* MonthCalendar css */
+
+/* days without and with pages linked to them */
+a.cal-emptyday {
+  color: #777777;
+  text-align: center;
+}
+a.cal-usedday {
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+}
+/* general stuff: workdays, weekend, today */
+td.cal-workday {
+  background-color: #DDDDFF;
+  text-align: center;
+}
+td.cal-weekend {
+  background-color: #FFDDDD;
+  text-align: center;
+}
+td.cal-today {
+  background-color: #CCFFCC;
+  border-style: solid;
+  border-width: 2pt;
+  text-align: center;
+}
+/* invalid places on the monthly calendar sheet */
+td.cal-invalidday {
+  background-color: #CCCCCC;
+}
+/* links to prev/next month/year */
+a.cal-link {
+  color: #000000;
+  text-decoration: none;
+}
+th.cal-header {
+  background-color: #DDBBFF;
+  text-align: center;
+}
+
+/* for MonthCalendar mouseover info boxes */
+TABLE.tip {
+  color: black;
+  background-color: #FF8888;
+  font-size: small;
+  font-weight: normal;
+  border-style: solid;
+  border-width: 1px;
+}
+
+TH.tip {
+  background-color: #FF4444;
+  font-weight: bold;
+  text-align: center;
+}
+
+TD.tip {
+  text-align: left;
+}
+*[dir="rtl"] TD.tip {
+  text-align: right;
+}
+
+/* end MonthCalendar stuff */
+
+
+/* Spans for line-anchors - uses * html hack so that the rule only applies to
+ * IE (where omitting the "display: none" triggers rendering bugs).
+ */
+* html span.anchor { display: none; }
+
+/* IE6 has a bug with rendering of float elements. We workaround this bug by
+ * assigning those elements a height attribute because we currently don't know
+ * a better solution. This results in IE calculating the correct height of the
+ * characters and displaying them correctly. We don't know any negative side
+ * effects of this workaround:
+ */
+/** html div#page { height: 0.001%; } this breaks sinorca4moin on IE6.0! */
+
+/* The next line fixed IE6.0 issues but breaks IE7 (preview after edit is below the editor window */
+/** html form#editor, html form#editor { height: 0.001%; }*/
+
+/* This seems to fix IE7 - but does it break IE6? */
+* html div#header, form#editor { height: 0.01%; }
+
+#usebbnetnavigation {
+	/*background-image: url('../img/bg/navtopmenu_bg.png');*/
+	background-repeat: repeat-x;
+	background-position: top;
+	background-color: rgb(228, 228, 228);
+	border-bottom: 1px solid #7f8080;
+	padding: 5px;
+	margin: 0px;
+	list-style: none;
+	text-align: left;
+	font-weight: bold;
+	font-size: 8pt;
+	color: silver;
+	/*border-top: 8px solid #020EB0;*/
+	
+}
+
+#usebbnetnavigation ul {
+margin: 0 auto;
+width: 940px;
+}
+
+
+#usebbnetnavigation li {
+	display: inline;
+	padding-right: 7px;
+	border-right: 2px solid silver;
+	margin-right: 7px;
+}
+#usebbnetnavigation li a {
+	text-decoration: none !important;
+	color: #369; 
+}
+#usebbnetnavigation li a:hover {
+	color: #7F0000 !important;
+}
+
+.rightalign 
+{
+  float: right;
+}
+.ib_copyright
+{
+ color: silver;
+}
